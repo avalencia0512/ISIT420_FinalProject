@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="HappyWealthyLifeDbModelStoreContainer" CdmEntityContainer="HappyWealthyLifeDbEntities">
+    <EntitySetMapping Name="Countries">
+      <EntityTypeMapping TypeName="HappyWealthyLifeDbModel.Country">
+        <MappingFragment StoreEntitySet="Country">
+          <ScalarProperty Name="countryId" ColumnName="countryId" />
+          <ScalarProperty Name="countryName" ColumnName="countryName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Happinesses">
+      <EntityTypeMapping TypeName="HappyWealthyLifeDbModel.Happiness">
+        <MappingFragment StoreEntitySet="Happiness">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="countryId" ColumnName="countryId" />
+          <ScalarProperty Name="yr2005" ColumnName="yr2005" />
+          <ScalarProperty Name="yr2006" ColumnName="yr2006" />
+          <ScalarProperty Name="yr2007" ColumnName="yr2007" />
+          <ScalarProperty Name="yr2008" ColumnName="yr2008" />
+          <ScalarProperty Name="yr2009" ColumnName="yr2009" />
+          <ScalarProperty Name="yr2010" ColumnName="yr2010" />
+          <ScalarProperty Name="yr2011" ColumnName="yr2011" />
+          <ScalarProperty Name="yr2012" ColumnName="yr2012" />
+          <ScalarProperty Name="yr2013" ColumnName="yr2013" />
+          <ScalarProperty Name="yr2014" ColumnName="yr2014" />
+          <ScalarProperty Name="yr2015" ColumnName="yr2015" />
+          <ScalarProperty Name="yr2016" ColumnName="yr2016" />
+          <ScalarProperty Name="yr2017" ColumnName="yr2017" />
+          <ScalarProperty Name="yr2018" ColumnName="yr2018" />
+          <ScalarProperty Name="yr2019" ColumnName="yr2019" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="IncomePPs">
+      <EntityTypeMapping TypeName="HappyWealthyLifeDbModel.IncomePP">
+        <MappingFragment StoreEntitySet="IncomePP">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="countryId" ColumnName="countryId" />
+          <ScalarProperty Name="yr2005" ColumnName="yr2005" />
+          <ScalarProperty Name="yr2006" ColumnName="yr2006" />
+          <ScalarProperty Name="yr2007" ColumnName="yr2007" />
+          <ScalarProperty Name="yr2008" ColumnName="yr2008" />
+          <ScalarProperty Name="yr2009" ColumnName="yr2009" />
+          <ScalarProperty Name="yr2010" ColumnName="yr2010" />
+          <ScalarProperty Name="yr2011" ColumnName="yr2011" />
+          <ScalarProperty Name="yr2012" ColumnName="yr2012" />
+          <ScalarProperty Name="yr2013" ColumnName="yr2013" />
+          <ScalarProperty Name="yr2014" ColumnName="yr2014" />
+          <ScalarProperty Name="yr2015" ColumnName="yr2015" />
+          <ScalarProperty Name="yr2016" ColumnName="yr2016" />
+          <ScalarProperty Name="yr2017" ColumnName="yr2017" />
+          <ScalarProperty Name="yr2018" ColumnName="yr2018" />
+          <ScalarProperty Name="yr2019" ColumnName="yr2019" />
+          <ScalarProperty Name="yr2020" ColumnName="yr2020" />
+          <ScalarProperty Name="yr2021" ColumnName="yr2021" />
+          <ScalarProperty Name="yr2022" ColumnName="yr2022" />
+          <ScalarProperty Name="yr2023" ColumnName="yr2023" />
+          <ScalarProperty Name="yr2024" ColumnName="yr2024" />
+          <ScalarProperty Name="yr2025" ColumnName="yr2025" />
+          <ScalarProperty Name="yr2026" ColumnName="yr2026" />
+          <ScalarProperty Name="yr2027" ColumnName="yr2027" />
+          <ScalarProperty Name="yr2028" ColumnName="yr2028" />
+          <ScalarProperty Name="yr2029" ColumnName="yr2029" />
+          <ScalarProperty Name="yr2030" ColumnName="yr2030" />
+          <ScalarProperty Name="yr2031" ColumnName="yr2031" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="LifeYears">
+      <EntityTypeMapping TypeName="HappyWealthyLifeDbModel.LifeYear">
+        <MappingFragment StoreEntitySet="LifeYears">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="countryId" ColumnName="countryId" />
+          <ScalarProperty Name="yr2005" ColumnName="yr2005" />
+          <ScalarProperty Name="yr2006" ColumnName="yr2006" />
+          <ScalarProperty Name="yr2007" ColumnName="yr2007" />
+          <ScalarProperty Name="yr2008" ColumnName="yr2008" />
+          <ScalarProperty Name="yr2009" ColumnName="yr2009" />
+          <ScalarProperty Name="yr2010" ColumnName="yr2010" />
+          <ScalarProperty Name="yr2011" ColumnName="yr2011" />
+          <ScalarProperty Name="yr2012" ColumnName="yr2012" />
+          <ScalarProperty Name="yr2013" ColumnName="yr2013" />
+          <ScalarProperty Name="yr2014" ColumnName="yr2014" />
+          <ScalarProperty Name="yr2015" ColumnName="yr2015" />
+          <ScalarProperty Name="yr2016" ColumnName="yr2016" />
+          <ScalarProperty Name="yr2017" ColumnName="yr2017" />
+          <ScalarProperty Name="yr2018" ColumnName="yr2018" />
+          <ScalarProperty Name="yr2019" ColumnName="yr2019" />
+          <ScalarProperty Name="yr2020" ColumnName="yr2020" />
+          <ScalarProperty Name="yr2021" ColumnName="yr2021" />
+          <ScalarProperty Name="yr2022" ColumnName="yr2022" />
+          <ScalarProperty Name="yr2023" ColumnName="yr2023" />
+          <ScalarProperty Name="yr2024" ColumnName="yr2024" />
+          <ScalarProperty Name="yr2025" ColumnName="yr2025" />
+          <ScalarProperty Name="yr2026" ColumnName="yr2026" />
+          <ScalarProperty Name="yr2027" ColumnName="yr2027" />
+          <ScalarProperty Name="yr2028" ColumnName="yr2028" />
+          <ScalarProperty Name="yr2029" ColumnName="yr2029" />
+          <ScalarProperty Name="yr2030" ColumnName="yr2030" />
+          <ScalarProperty Name="yr2031" ColumnName="yr2031" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
