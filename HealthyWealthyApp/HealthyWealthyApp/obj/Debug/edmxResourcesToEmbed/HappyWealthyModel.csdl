@@ -1,0 +1,160 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="HappyWealthyLifeDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Country">
+    <Key>
+      <PropertyRef Name="countryId" />
+    </Key>
+    <Property Name="countryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="countryName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Happinesses" Relationship="Self.FK_Happiness_Country" FromRole="Country" ToRole="Happiness" />
+    <NavigationProperty Name="IncomePPs" Relationship="Self.FK_IncomePP_Country" FromRole="Country" ToRole="IncomePP" />
+    <NavigationProperty Name="LifeYears" Relationship="Self.FK_LifeYears_Country" FromRole="Country" ToRole="LifeYears" />
+  </EntityType>
+  <EntityType Name="Happiness">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="countryId" Type="Int32" Nullable="false" />
+    <Property Name="yr2005" Type="Double" Nullable="false" />
+    <Property Name="yr2006" Type="Double" Nullable="false" />
+    <Property Name="yr2007" Type="Double" Nullable="false" />
+    <Property Name="yr2008" Type="Double" Nullable="false" />
+    <Property Name="yr2009" Type="Double" Nullable="false" />
+    <Property Name="yr2010" Type="Double" Nullable="false" />
+    <Property Name="yr2011" Type="Double" Nullable="false" />
+    <Property Name="yr2012" Type="Double" Nullable="false" />
+    <Property Name="yr2013" Type="Double" Nullable="false" />
+    <Property Name="yr2014" Type="Double" Nullable="false" />
+    <Property Name="yr2015" Type="Double" Nullable="false" />
+    <Property Name="yr2016" Type="Double" Nullable="false" />
+    <Property Name="yr2017" Type="Double" Nullable="false" />
+    <Property Name="yr2018" Type="Double" Nullable="false" />
+    <Property Name="yr2019" Type="Double" Nullable="false" />
+    <NavigationProperty Name="Country" Relationship="Self.FK_Happiness_Country" FromRole="Happiness" ToRole="Country" />
+  </EntityType>
+  <EntityType Name="IncomePP">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="countryId" Type="Int32" Nullable="false" />
+    <Property Name="yr2005" Type="Int32" Nullable="false" />
+    <Property Name="yr2006" Type="Int32" Nullable="false" />
+    <Property Name="yr2007" Type="Int32" Nullable="false" />
+    <Property Name="yr2008" Type="Int32" Nullable="false" />
+    <Property Name="yr2009" Type="Int32" Nullable="false" />
+    <Property Name="yr2010" Type="Int32" Nullable="false" />
+    <Property Name="yr2011" Type="Int32" Nullable="false" />
+    <Property Name="yr2012" Type="Int32" Nullable="false" />
+    <Property Name="yr2013" Type="Int32" Nullable="false" />
+    <Property Name="yr2014" Type="Int32" Nullable="false" />
+    <Property Name="yr2015" Type="Int32" Nullable="false" />
+    <Property Name="yr2016" Type="Int32" Nullable="false" />
+    <Property Name="yr2017" Type="Int32" Nullable="false" />
+    <Property Name="yr2018" Type="Int32" Nullable="false" />
+    <Property Name="yr2019" Type="Int32" Nullable="false" />
+    <Property Name="yr2020" Type="Int32" Nullable="false" />
+    <Property Name="yr2021" Type="Int32" Nullable="false" />
+    <Property Name="yr2022" Type="Int32" Nullable="false" />
+    <Property Name="yr2023" Type="Int32" Nullable="false" />
+    <Property Name="yr2024" Type="Int32" Nullable="false" />
+    <Property Name="yr2025" Type="Int32" Nullable="false" />
+    <Property Name="yr2026" Type="Int32" Nullable="false" />
+    <Property Name="yr2027" Type="Int32" Nullable="false" />
+    <Property Name="yr2028" Type="Int32" Nullable="false" />
+    <Property Name="yr2029" Type="Int32" Nullable="false" />
+    <Property Name="yr2030" Type="Int32" Nullable="false" />
+    <Property Name="yr2031" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Country" Relationship="Self.FK_IncomePP_Country" FromRole="IncomePP" ToRole="Country" />
+  </EntityType>
+  <EntityType Name="LifeYear">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="countryId" Type="Int32" Nullable="false" />
+    <Property Name="yr2005" Type="Double" Nullable="false" />
+    <Property Name="yr2006" Type="Double" Nullable="false" />
+    <Property Name="yr2007" Type="Double" Nullable="false" />
+    <Property Name="yr2008" Type="Double" Nullable="false" />
+    <Property Name="yr2009" Type="Double" Nullable="false" />
+    <Property Name="yr2010" Type="Double" Nullable="false" />
+    <Property Name="yr2011" Type="Double" Nullable="false" />
+    <Property Name="yr2012" Type="Double" Nullable="false" />
+    <Property Name="yr2013" Type="Double" Nullable="false" />
+    <Property Name="yr2014" Type="Double" Nullable="false" />
+    <Property Name="yr2015" Type="Double" Nullable="false" />
+    <Property Name="yr2016" Type="Double" Nullable="false" />
+    <Property Name="yr2017" Type="Double" Nullable="false" />
+    <Property Name="yr2018" Type="Double" Nullable="false" />
+    <Property Name="yr2019" Type="Double" Nullable="false" />
+    <Property Name="yr2020" Type="Double" Nullable="false" />
+    <Property Name="yr2021" Type="Double" Nullable="false" />
+    <Property Name="yr2022" Type="Double" Nullable="false" />
+    <Property Name="yr2023" Type="Double" Nullable="false" />
+    <Property Name="yr2024" Type="Double" Nullable="false" />
+    <Property Name="yr2025" Type="Double" Nullable="false" />
+    <Property Name="yr2026" Type="Double" Nullable="false" />
+    <Property Name="yr2027" Type="Double" Nullable="false" />
+    <Property Name="yr2028" Type="Double" Nullable="false" />
+    <Property Name="yr2029" Type="Double" Nullable="false" />
+    <Property Name="yr2030" Type="Double" Nullable="false" />
+    <Property Name="yr2031" Type="Double" Nullable="false" />
+    <NavigationProperty Name="Country" Relationship="Self.FK_LifeYears_Country" FromRole="LifeYears" ToRole="Country" />
+  </EntityType>
+  <Association Name="FK_Happiness_Country">
+    <End Role="Country" Type="Self.Country" Multiplicity="1" />
+    <End Role="Happiness" Type="Self.Happiness" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="countryId" />
+      </Principal>
+      <Dependent Role="Happiness">
+        <PropertyRef Name="countryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_IncomePP_Country">
+    <End Role="Country" Type="Self.Country" Multiplicity="1" />
+    <End Role="IncomePP" Type="Self.IncomePP" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="countryId" />
+      </Principal>
+      <Dependent Role="IncomePP">
+        <PropertyRef Name="countryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_LifeYears_Country">
+    <End Role="Country" Type="Self.Country" Multiplicity="1" />
+    <End Role="LifeYears" Type="Self.LifeYear" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Country">
+        <PropertyRef Name="countryId" />
+      </Principal>
+      <Dependent Role="LifeYears">
+        <PropertyRef Name="countryId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="HappyWealthyLifeDbEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Countries" EntityType="Self.Country" />
+    <EntitySet Name="Happinesses" EntityType="Self.Happiness" />
+    <EntitySet Name="IncomePPs" EntityType="Self.IncomePP" />
+    <EntitySet Name="LifeYears" EntityType="Self.LifeYear" />
+    <AssociationSet Name="FK_Happiness_Country" Association="Self.FK_Happiness_Country">
+      <End Role="Country" EntitySet="Countries" />
+      <End Role="Happiness" EntitySet="Happinesses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_IncomePP_Country" Association="Self.FK_IncomePP_Country">
+      <End Role="Country" EntitySet="Countries" />
+      <End Role="IncomePP" EntitySet="IncomePPs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_LifeYears_Country" Association="Self.FK_LifeYears_Country">
+      <End Role="Country" EntitySet="Countries" />
+      <End Role="LifeYears" EntitySet="LifeYears" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

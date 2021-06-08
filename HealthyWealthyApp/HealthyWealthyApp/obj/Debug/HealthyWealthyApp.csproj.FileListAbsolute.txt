@@ -32,3 +32,7 @@ D:\Bachelors\BellevueCollege\2021\Spring-2021\ISIT420-AdvData\HWs\CourseProject\
 D:\Bachelors\BellevueCollege\2021\Spring-2021\ISIT420-AdvData\HWs\CourseProject\ISIT420_FinalProject\HealthyWealthyApp\HealthyWealthyApp\obj\Debug\HealthyWealthyApp.csproj.CopyComplete
 D:\Bachelors\BellevueCollege\2021\Spring-2021\ISIT420-AdvData\HWs\CourseProject\ISIT420_FinalProject\HealthyWealthyApp\HealthyWealthyApp\obj\Debug\HealthyWealthyApp.dll
 D:\Bachelors\BellevueCollege\2021\Spring-2021\ISIT420-AdvData\HWs\CourseProject\ISIT420_FinalProject\HealthyWealthyApp\HealthyWealthyApp\obj\Debug\HealthyWealthyApp.pdb
+D:\Bachelors\BellevueCollege\2021\Spring-2021\ISIT420-AdvData\HWs\CourseProject\ISIT420_FinalProject\HealthyWealthyApp\HealthyWealthyApp\bin\EntityFramework.dll
+D:\Bachelors\BellevueCollege\2021\Spring-2021\ISIT420-AdvData\HWs\CourseProject\ISIT420_FinalProject\HealthyWealthyApp\HealthyWealthyApp\bin\EntityFramework.SqlServer.dll
+D:\Bachelors\BellevueCollege\2021\Spring-2021\ISIT420-AdvData\HWs\CourseProject\ISIT420_FinalProject\HealthyWealthyApp\HealthyWealthyApp\bin\EntityFramework.xml
+D:\Bachelors\BellevueCollege\2021\Spring-2021\ISIT420-AdvData\HWs\CourseProject\ISIT420_FinalProject\HealthyWealthyApp\HealthyWealthyApp\bin\EntityFramework.SqlServer.xml
