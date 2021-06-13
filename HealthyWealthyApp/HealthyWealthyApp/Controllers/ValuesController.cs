@@ -9,31 +9,20 @@ namespace HealthyWealthyApp.Controllers
 {
     public class ValuesController : ApiController
     {
-        // GET api/values
-        public IEnumerable<string> Get()
+        [ActionName("topCDCounts")]
+        public IHttpActionResult GetTopCDCounts()
         {
-            return new string[] { "value1", "value2" };
+            List<CityCDCount> counts = new List<CityCDCount>();
+            counts.Add(new CityCDCount() { CityName = "Bellevue", RowsCount = 3 });
+            counts.Add(new CityCDCount() { CityName = "Redmond", RowsCount = 10 });
+            
+            return Json(counts);
         }
+    }
 
-        // GET api/values/5
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // POST api/values
-        public void Post([FromBody] string value)
-        {
-        }
-
-        // PUT api/values/5
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/values/5
-        public void Delete(int id)
-        {
-        }
+    public class CityCDCount
+    {
+        public string CityName { get; set; }
+        public int RowsCount { get; set; }
     }
 }

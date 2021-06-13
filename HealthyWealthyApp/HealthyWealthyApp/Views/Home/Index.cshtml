@@ -1,14 +1,17 @@
-﻿<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS, and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+﻿@{
+    ViewBag.Title = "Happy Wealthy Analysis";
+}
+
+
+<!--
 <div class="row">
     <div class="col-md-4">
         <h2>Getting started</h2>
-        <p>ASP.NET Web API is a framework that makes it easy to build HTTP services that reach
-        a broad range of clients, including browsers and mobile devices. ASP.NET Web API
-        is an ideal platform for building RESTful applications on the .NET Framework.</p>
+        <p>
+            ASP.NET Web API is a framework that makes it easy to build HTTP services that reach
+            a broad range of clients, including browsers and mobile devices. ASP.NET Web API
+            is an ideal platform for building RESTful applications on the .NET Framework.
+        </p>
         <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301870">Learn more &raquo;</a></p>
     </div>
     <div class="col-md-4">
@@ -20,5 +23,137 @@
         <h2>Web Hosting</h2>
         <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
         <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301872">Learn more &raquo;</a></p>
+    </div>
+    <button onclick="getMarkups()">Get Markups</button>
+</div>
+
+<div class="row">
+    <asp:GridView runat="server" id="dataGrid" />
+</div>
+    -->
+
+<div data-role="page" id="query1">
+    <div data-role="header" data-theme="c">
+        <div class="jumbotron">
+            <h1>Healthy Wealthy Analysis</h1>
+            <p class="lead">Analysis that shows the relation between wealth and happiness.</p>
+            <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+        </div>
+
+        <h2>Wealthy equals Healthy</h2>
+        <br />
+        <div data-role="navbar" data-theme="b">
+            <ul>
+                <li><a href="#query2">Happy Live Longer</a></li>
+                <li><a href="#query3">Wealthy Live Longer</a></li>
+            </ul>
+        </div>
+
+        <div data-role="main" data-theme="a">
+            <h1>Wealthy equals Healthy Contents</h1>
+            <br />
+
+            <div class="form table-bordered">
+                <div class="form-body" enter-key="$ctrl.doSearch()">
+                    <div class="row">
+                        <div class="form-group col-md-4">
+                            <label class="control-label">Country's Count</label>
+                            <input type="range" id="countryTopCount" name="countryTopCount"
+                                   min="0" max="160" class="form-control input" placeholder="Country's Count" />
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label class="control-label"></label>
+                            <input type="submit" value="Load" onclick="getWealthyHealthy()">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <input id="btnQuery1" type="button" value="Get Happy Score" />
+            <table id="happyTable" class="table table-bordered table-condensed table-hover table-striped">
+                <thead>
+                    <tr>
+                        <th>Country Name</th>
+                        <th>Count</th>
+                    </tr>
+                </thead>
+                <tbody id="happyTableBody">
+                    <tr>
+                        <td>CCC</td>
+                        <td>333</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+        <br /><br /><br /><br />
+
+        <hr />
+        <div data-role="footer" data-theme='c'>
+            <h4 id="footertext"><p>&copy; @DateTime.Now.Year For Entertainment Purpose Only</p></h4>
+        </div>
+    
+        <!--
+        <hr />
+        <footer>
+            <p style="margin-left:10px;">&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+        -->
+    </div>
+</div>
+
+<div data-role="page" id="query2">
+    <div data-role="header" data-theme="c">
+        <div class="jumbotron">
+            <h1>Healthy Wealthy Analysis</h1>
+            <p class="lead">Analysis that shows the relation between wealth and happiness.</p>
+            <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+        </div>
+
+        <h2>Happy Live Longer</h2>
+        <br />
+        <div data-role="navbar" data-theme="b">
+            <ul>
+                <li><a href="#query1">Wealthy equals Healthy</a></li>
+                <li><a href="#query3">Wealthy Live Longer</a></li>
+            </ul>
+        </div>
+
+        <div data-role="main" data-theme="a">
+            <h1>Happy Live Longer Contents</h1>
+        </div>
+
+        <div data-role="footer" data-theme='b'>
+            <h4 id="footertext">For Entertainment Purpose Only</h4>
+        </div>
+    </div>
+</div>
+
+<div data-role="page" id="query3">
+    <div data-role="header" data-theme="c">
+        <div class="jumbotron">
+            <h1>Healthy Wealthy Analysis</h1>
+            <p class="lead">Analysis that shows the relation between wealth and happiness.</p>
+            <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+        </div>
+
+        <h2>Wealthy Live Longer</h2>
+        <br />
+        <div data-role="navbar" data-theme="b">
+            <ul>
+                <li><a href="#query1">Wealthy equals Healthy</a></li>
+                <li><a href="#query2">Happy Live Longer</a></li>
+            </ul>
+        </div>
+
+        <div data-role="main" data-theme="a">
+            <h1>Wealthy Live Longer Contents</h1>
+        </div>
+
+        <div data-role="footer" data-theme='a'>
+            <h4 id="footertext">For Entertainment Purpose Only</h4>
+        </div>
     </div>
 </div>

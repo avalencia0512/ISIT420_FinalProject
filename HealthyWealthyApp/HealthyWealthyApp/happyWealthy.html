@@ -1,0 +1,111 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Healthy Wealthy</title>
+    <script src="Scripts/jquery-3.4.1.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#btnQuery1').click(function () {
+                $.ajax({
+                    type: 'GET',
+                    url: 'api/Values',
+                    dataTypes: 'json',
+                    success: function (data) {
+                        var happyTable = $('#happyTable');
+                        var tr;
+                        // Empty table
+                        //happyTable.
+                        $.each(data, function (index, val) {
+                            tr = $('<tr/>');
+                            tr.append("<td>" + val.CityName + "</td>");
+                            tr.append("<td>" + val.RowsCount + "</td>");
+                            $('table').append(tr);
+                        });
+                    }
+                }); // ajax
+            }); // btnQuery1
+        })  // document ready
+    </script>
+</head>
+<body>
+    <input id="btnQuery1" type="button" value="Get Happy Score" />
+    <table id="happyTable" class="table table-bordered table-condensed table-hover table-striped">
+        <thead>
+            <tr>
+                <th>City Name</th>
+                <th>Count</th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
+    <div data-role="page" id="query1">
+        <div data-role="header" data-theme="c">
+            <h2>Wealthy equals Healthy</h2>
+            <br />
+            <div data-role="navbar" data-theme="b">
+                <ul>
+                    <li><a href="#query2">Happy Live Longer</a></li>
+                    <li><a href="#query3">Wealthy Live Longer</a></li>
+                </ul>
+            </div>
+
+            <div data-role="main" data-theme="a">
+                <h1>Wealthy == Healthy Contents</h1>
+            </div>
+
+            <div data-role="footer" data-theme='a'>
+                <h4 id="footertext">For Entertainment Purpose Only</h4>
+            </div>
+        </div>
+    </div>
+
+    <div data-role="page" id="query2">
+        <div data-role="header" data-theme="c">
+            <h2>Happy Live Longer</h2>
+            <br />
+            <div data-role="navbar" data-theme="b">
+                <ul>
+                    <li><a href="#query1">Wealthy equals Healthy</a></li>
+                    <li><a href="#query3">Wealthy Live Longer</a></li>
+                </ul>
+            </div>
+
+            <div data-role="main" data-theme="a">
+                <h1>Happy Live Longer Contents</h1>
+            </div>
+
+            <div data-role="footer" data-theme='a'>
+                <h4 id="footertext">For Entertainment Purpose Only</h4>
+            </div>
+        </div>
+    </div>
+
+    <div data-role="page" id="query3">
+        <div data-role="header" data-theme="c">
+            <h2>Wealthy Live Longer</h2>
+            <br />
+            <div data-role="navbar" data-theme="b">
+                <ul>
+                    <li><a href="#query1">Wealthy equals Healthy</a></li>
+                    <li><a href="#query2">Happy Live Longer</a></li>
+                </ul>
+            </div>
+
+            <div data-role="main" data-theme="a">
+                <h1>Wealthy Live Longer Contents</h1>
+            </div>
+
+            <div data-role="footer" data-theme='a'>
+                <h4 id="footertext">For Entertainment Purpose Only</h4>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
