@@ -1,7 +1,4 @@
-﻿@{
-    ViewBag.Title = "Happy Wealthy Analysis";
-}
-
+﻿
 
 <!--
 <div class="row">
@@ -44,6 +41,7 @@
         <br />
         <div data-role="navbar" data-theme="b">
             <ul>
+                <li><a href="#query1">Wealthy equals Healthy</a></li>
                 <li><a href="#query2">Happy Live Longer</a></li>
                 <li><a href="#query3">Wealthy Live Longer</a></li>
             </ul>
@@ -62,8 +60,7 @@
                                    min="0" max="160" class="form-control input" placeholder="Country's Count" />
                         </div>
                         <div class="form-group col-md-2">
-                            <label class="control-label"></label>
-                            <input type="submit" value="Load" onclick="getWealthyHealthy()">
+                            <input type="submit" value="Load" onclick="getWealthyHealthy()" style="margin-top:35px;">
                         </div>
                     </div>
 
@@ -94,7 +91,7 @@
         <div data-role="footer" data-theme='c'>
             <h4 id="footertext"><p>&copy; @DateTime.Now.Year For Entertainment Purpose Only</p></h4>
         </div>
-    
+
         <!--
         <hr />
         <footer>
@@ -104,7 +101,17 @@
     </div>
 </div>
 
-<div data-role="page" id="query2">
+<!--
+2.	Do happy people live longer? - Relate happiness with life expectancy. Analyze if more happy people live longer.
+1.	Find Avg of happiness score for each countryId (for specific period if any)
+2.	Find Avg Age of life for each countryID (for specific period if any)
+3.	Show top X happy country’s with their avg life age
+
+Filters on:
+I.	Happiness Score >= (0.1 – 1.0)
+II.	Country
+-->
+<div data-role="page" id="query2" class="container">
     <div data-role="header" data-theme="c">
         <div class="jumbotron">
             <h1>Healthy Wealthy Analysis</h1>
@@ -114,23 +121,76 @@
 
         <h2>Happy Live Longer</h2>
         <br />
+        <!-- nav bar -->
         <div data-role="navbar" data-theme="b">
             <ul>
                 <li><a href="#query1">Wealthy equals Healthy</a></li>
+                <li><a href="#query2">Happy Live Longer</a></li>
                 <li><a href="#query3">Wealthy Live Longer</a></li>
             </ul>
         </div>
 
         <div data-role="main" data-theme="a">
             <h1>Happy Live Longer Contents</h1>
+            <br />
+
+            <div class="form table-bordered">
+                <div class="form-body">
+                    <div class="row">
+                        <div class="form-group col-md-4">
+                            <label class="control-label">Happiness Score Greater Than </label>
+                            <input type="range" id="countryTopCount" name="countryTopCount" value="0.7"
+                                   min="0.1" max="1.0" class="form-control input" placeholder="Country's Count" />
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label class="control-label">Country</label>
+                            <select id="selectHappyLife" class="bs-select form-control" data-style="blue">
+                                <option>Afghanistan</option>
+                                <option>USA</option>
+                                <option>UAE</option>
+                                <option>Canada</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <input type="submit" value="Submit" onclick="getHappyLongerLife()" style="margin-top:35px;">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <table id="happyLifeTable" class="table table-bordered table-condensed table-hover table-striped">
+                <thead>
+                    <tr>
+                        <th>Country Name</th>
+                        <th>Count</th>
+                    </tr>
+                </thead>
+                <tbody id="happyLifeTableBody">
+                    <tr>
+                        <td>CCC</td>
+                        <td>333</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
 
-        <div data-role="footer" data-theme='b'>
-            <h4 id="footertext">For Entertainment Purpose Only</h4>
+        <br /><br /><br /><br />
+
+        <hr />
+        <div data-role="footer" data-theme='c'>
+            <h4 id="footertext"><p>&copy; @DateTime.Now.Year For Entertainment Purpose Only</p></h4>
         </div>
     </div>
 </div>
 
+<!--
+3.	Do wealthier people live longer? - Show estimated income per person and life expectancy of up to next 10 years.
+1.	Grab the estimated Income & Life for next X years
+Filters on:
+I.	Next X years (1-10)
+II.	Income >= Y (user input)
+-->
 <div data-role="page" id="query3">
     <div data-role="header" data-theme="c">
         <div class="jumbotron">
@@ -145,15 +205,54 @@
             <ul>
                 <li><a href="#query1">Wealthy equals Healthy</a></li>
                 <li><a href="#query2">Happy Live Longer</a></li>
+                <li><a href="#query3">Wealthy Live Longer</a></li>
             </ul>
         </div>
 
         <div data-role="main" data-theme="a">
             <h1>Wealthy Live Longer Contents</h1>
+            <br />
+
+            <div class="form table-bordered">
+                <div class="form-body">
+                    <div class="row">
+                        <div class="form-group col-md-4">
+                            <label class="control-label">For Next years </label>
+                            <input type="range" id="nextYearsRange" name="nextYearsRange" value="10"
+                                   min="1" max="10" class="form-control input" placeholder="Years" />
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label class="control-label">Income Greater Than Equal To</label>
+                            <input class="form-control input" type="number" id="estIncomeInput" name="estIncomeInput" /> 
+                        </div>
+                        <div class="form-group col-md-2">
+                            <input type="submit" value="Submit" onclick="getEstdIncomeLife()" style="margin-top:35px;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <table id="incomeLifeTable" class="table table-bordered table-condensed table-hover table-striped">
+                <thead>
+                    <tr>
+                        <th>Country Name</th>
+                        <th>Row Count</th>
+                    </tr>
+                </thead>
+                <tbody id="incomeLifeTableBody">
+                    <tr>
+                        <td>CCC</td>
+                        <td>222</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
 
-        <div data-role="footer" data-theme='a'>
-            <h4 id="footertext">For Entertainment Purpose Only</h4>
+        <br /><br /><br /><br />
+
+        <hr />
+        <div data-role="footer" data-theme='c'>
+            <h4 id="footertext"><p>&copy; @DateTime.Now.Year For Entertainment Purpose Only</p></h4>
         </div>
     </div>
 </div>
