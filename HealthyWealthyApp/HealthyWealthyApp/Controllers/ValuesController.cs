@@ -1,16 +1,23 @@
 ﻿using System.Collections.Generic;
 using System.Web.Http;
+using System.Linq;
+using System;
+
 
 namespace HealthyWealthyApp.Controllers
 {
     public class ValuesController : ApiController
     {
+
+        //Creates an instance of the object context
+        HappyWealthyLifeDbEntities entities = new HappyWealthyLifeDbEntities();
+
         [ActionName("wealthyIsHappy")]
         public IHttpActionResult GetWealthyIsHappy()
         {
-            List<CityCDCount> counts = new List<CityCDCount>();
-            counts.Add(new CityCDCount() { CityName = "Bellevue", RowsCount = 3 });
-            counts.Add(new CityCDCount() { CityName = "Redmond", RowsCount = 10 });
+            List<Results> counts = new List<Results>();
+            counts.Add(new Results() { CountryName = "Bellevue", CountryId = 3 });
+            counts.Add(new Results() { CountryName = "Redmond", CountryId = 10 });
 
             return Json(counts);
         }
@@ -19,34 +26,154 @@ namespace HealthyWealthyApp.Controllers
         [ActionName("happyLongLife")]
         public IHttpActionResult GetHappyLongerLife()
         {
-            List<CityCDCount> counts = new List<CityCDCount>();
-            counts.Add(new CityCDCount() { CityName = "Mumbai", RowsCount = 84 });
-            counts.Add(new CityCDCount() { CityName = "Bhavnagar", RowsCount = 65 });
-            counts.Add(new CityCDCount() { CityName = "Surat", RowsCount = 42 });
-            counts.Add(new CityCDCount() { CityName = "Ahmedabad", RowsCount = 41 });
+            //List<Results> record = new List<Results>();
 
-            return Json(counts);
+
+            var HappyCollection = (from country in entities.Countries
+                                   from happyScore in country.Happinesses
+/*                                   from lifeSpan in country.LifeYears
+                                   where(lifeSpan.countryId == happyScore.countryId)*/
+                                   let avgHappyScore = (new[]
+                                  {  happyScore.yr2005,
+                                     happyScore.yr2006,
+                                     happyScore.yr2007,
+                                     happyScore.yr2008,
+                                     happyScore.yr2009,
+                                     happyScore.yr2010,
+                                     happyScore.yr2011,
+                                     happyScore.yr2012,
+                                     happyScore.yr2013,
+                                     happyScore.yr2014,
+                                     happyScore.yr2015,
+                                     happyScore.yr2016,
+                                     happyScore.yr2017,
+                                     happyScore.yr2018,
+                                     happyScore.yr2019
+                                  }).Average()
+                                   orderby avgHappyScore descending
+                                   select new
+                                   {
+                                       CountryId = country.countryId,
+                                       CountryName = country.countryName,
+                                       AvgHappyScore = avgHappyScore, 
+                                       //AvgLifeSpan = GetAvgLifeSpanByCountryId(happyScore.countryId)
+
+                                   }).Take(10);
+
+            GetAvgLifeSpanByCountryId(41);
+
+
+            /*IEnumerable<Results> enumerable()
+            {
+                foreach (var item in LifeCollection)
+                {
+                    if (HappyCollection.)
+                    {
+
+                    }
+                }
+
+                return null
+            }
+
+*/
+            return Json(HappyCollection);
+        }
+
+
+        public int GetAvgLifeSpanByCountryId(int countryId)
+        {
+            var LifeCollection = from lifeSpan in entities.LifeYears
+                                 where (lifeSpan.countryId == countryId)
+                                 let avgLifeSpan = (new[]
+                                   {
+                                      lifeSpan.yr2005,
+                                      lifeSpan.yr2006,
+                                      lifeSpan.yr2007,
+                                      lifeSpan.yr2008,
+                                      lifeSpan.yr2009,
+                                      lifeSpan.yr2010,
+                                      lifeSpan.yr2011,
+                                      lifeSpan.yr2012,
+                                      lifeSpan.yr2013,
+                                      lifeSpan.yr2014,
+                                      lifeSpan.yr2015,
+                                      lifeSpan.yr2016,
+                                      lifeSpan.yr2017,
+                                      lifeSpan.yr2018,
+                                      lifeSpan.yr2019,
+                                   }).Average()
+                                 select new
+                                 {
+                                     avgLifeSpan
+                                };
+
+            Console.WriteLine("Items in LifeCollection: ");
+            foreach(var item in LifeCollection)
+            {
+                Console.WriteLine(item);
+            }
+            //int[] array =  LifeCollection.ToArray<int>();
+
+            return 0;
+        }
+
+
+        //Helper to get avg life span 
+        [ActionName("avgLifeSpan")]
+        public IHttpActionResult GetAvgLifeSpan()
+        {
+            var LifeCollection = from country in entities.Countries
+                                 from lifeSpan in country.LifeYears
+                                 let avgLifeSpan = (new[]
+                                   {
+                                      lifeSpan.yr2005,
+                                      lifeSpan.yr2006,
+                                      lifeSpan.yr2007,
+                                      lifeSpan.yr2008,
+                                      lifeSpan.yr2009,
+                                      lifeSpan.yr2010,
+                                      lifeSpan.yr2011,
+                                      lifeSpan.yr2012,
+                                      lifeSpan.yr2013,
+                                      lifeSpan.yr2014,
+                                      lifeSpan.yr2015,
+                                      lifeSpan.yr2016,
+                                      lifeSpan.yr2017,
+                                      lifeSpan.yr2018,
+                                      lifeSpan.yr2019,
+                                   }).Average()
+                                 select new
+                                 {
+                                     AvgLifeSpan = avgLifeSpan
+                                 };
+            return Json(LifeCollection);
         }
 
         // Query 3 - Show estimated income per person and life expectancy of up to next 10 years. 
         [ActionName("estdIncomeLife")]
         public IHttpActionResult GetEstdIncomeLife()
         {
-            List<CityCDCount> counts = new List<CityCDCount>();
-            counts.Add(new CityCDCount() { CityName = "Seattle", RowsCount = 69 });
-            counts.Add(new CityCDCount() { CityName = "Houston", RowsCount = 78 });
-            counts.Add(new CityCDCount() { CityName = "Orlando", RowsCount = 85 });
-            counts.Add(new CityCDCount() { CityName = "New Jersey", RowsCount = 59 });
+            List<Results> counts = new List<Results>();
+            counts.Add(new Results() { CountryName = "Seattle", CountryId = 69 });
+            counts.Add(new Results() { CountryName = "Houston", CountryId = 78 });
+            counts.Add(new Results() { CountryName = "Orlando", CountryId = 85 });
+            counts.Add(new Results() { CountryName = "New Jersey", CountryId = 59 });
 
             return Json(counts);
         }
     }
 
 
-    public class CityCDCount
+    public class Results
     {
-        public string CityName { get; set; }
-        public int RowsCount { get; set; }
+        public string CountryName { get; set; }
+
+        public int CountryId { get; set; }
+
+        public double AvgHappyScore { get; set; }
+
+        public int AvgLifeSpan { get; set; }
     }
 
 }
