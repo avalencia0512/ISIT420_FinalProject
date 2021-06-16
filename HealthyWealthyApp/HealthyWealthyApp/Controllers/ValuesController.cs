@@ -2,7 +2,7 @@
 using System.Web.Http;
 using System.Linq;
 using System;
-
+using Newtonsoft.Json;
 
 namespace HealthyWealthyApp.Controllers
 {
@@ -22,133 +22,118 @@ namespace HealthyWealthyApp.Controllers
             return Json(counts);
         }
 
+        //Query #2 - Do happy people live longer? - Relate happiness with life expectancy. Analyze if more happy people live longer. 
         // http://localhost:1289/api/values/happyLongLife
         [ActionName("happyLongLife")]
         public IHttpActionResult GetHappyLongerLife()
         {
-            //List<Results> record = new List<Results>();
 
+            var HappyCollection =  (from country in entities.Countries
+                                       from happyScore in country.Happinesses
+                                       from lifeSpan in country.LifeYears
+                                       where (lifeSpan.countryId == happyScore.countryId)
+                                       let avgHappyScore = (new[]
+                                       {
+                                             happyScore.yr2005,
+                                             happyScore.yr2006,
+                                             happyScore.yr2007,
+                                             happyScore.yr2008,
+                                             happyScore.yr2009,
+                                             happyScore.yr2010,
+                                             happyScore.yr2011,
+                                             happyScore.yr2012,
+                                             happyScore.yr2013,
+                                             happyScore.yr2014,
+                                             happyScore.yr2015,
+                                             happyScore.yr2016,
+                                             happyScore.yr2017,
+                                             happyScore.yr2018,
+                                             happyScore.yr2019
+                                       }).Average()
+                                       orderby avgHappyScore descending
+                                       let avgLifeSpan = (new[]
+                                       {
+                                              lifeSpan.yr2005,
+                                              lifeSpan.yr2006,
+                                              lifeSpan.yr2007,
+                                              lifeSpan.yr2008,
+                                              lifeSpan.yr2009,
+                                              lifeSpan.yr2010,
+                                              lifeSpan.yr2011,
+                                              lifeSpan.yr2012,
+                                              lifeSpan.yr2013,
+                                              lifeSpan.yr2014,
+                                              lifeSpan.yr2015,
+                                              lifeSpan.yr2016,
+                                              lifeSpan.yr2017,
+                                              lifeSpan.yr2018,
+                                              lifeSpan.yr2019,
+                                       }).Average()
+                                       select new Results
+                                       {
+                                           CountryId = country.countryId,
+                                           CountryName = country.countryName,
+                                           AvgHappyScore = avgHappyScore,
+                                           AvgLifeSpan = avgLifeSpan
+                                       }).Take(10);
+           List<Results> happyList =  HappyCollection.ToList<Results>();
 
-            var HappyCollection = (from country in entities.Countries
+            var LifeCollection = (from country in entities.Countries
                                    from happyScore in country.Happinesses
-/*                                   from lifeSpan in country.LifeYears
-                                   where(lifeSpan.countryId == happyScore.countryId)*/
-                                   let avgHappyScore = (new[]
-                                  {  happyScore.yr2005,
-                                     happyScore.yr2006,
-                                     happyScore.yr2007,
-                                     happyScore.yr2008,
-                                     happyScore.yr2009,
-                                     happyScore.yr2010,
-                                     happyScore.yr2011,
-                                     happyScore.yr2012,
-                                     happyScore.yr2013,
-                                     happyScore.yr2014,
-                                     happyScore.yr2015,
-                                     happyScore.yr2016,
-                                     happyScore.yr2017,
-                                     happyScore.yr2018,
-                                     happyScore.yr2019
-                                  }).Average()
-                                   orderby avgHappyScore descending
-                                   select new
+                                   from lifeSpan in country.LifeYears
+                                   where (lifeSpan.countryId == happyScore.countryId)
+                                  let avgLifeSpan = (new[]
+                                  {
+                                              lifeSpan.yr2005,
+                                              lifeSpan.yr2006,
+                                              lifeSpan.yr2007,
+                                              lifeSpan.yr2008,
+                                              lifeSpan.yr2009,
+                                              lifeSpan.yr2010,
+                                              lifeSpan.yr2011,
+                                              lifeSpan.yr2012,
+                                              lifeSpan.yr2013,
+                                              lifeSpan.yr2014,
+                                              lifeSpan.yr2015,
+                                              lifeSpan.yr2016,
+                                              lifeSpan.yr2017,
+                                              lifeSpan.yr2018,
+                                              lifeSpan.yr2019,
+                                       }).Average()
+                                  orderby avgLifeSpan descending
+                                  let avgHappyScore = (new[]
+                                   {
+                                             happyScore.yr2005,
+                                             happyScore.yr2006,
+                                             happyScore.yr2007,
+                                             happyScore.yr2008,
+                                             happyScore.yr2009,
+                                             happyScore.yr2010,
+                                             happyScore.yr2011,
+                                             happyScore.yr2012,
+                                             happyScore.yr2013,
+                                             happyScore.yr2014,
+                                             happyScore.yr2015,
+                                             happyScore.yr2016,
+                                             happyScore.yr2017,
+                                             happyScore.yr2018,
+                                             happyScore.yr2019
+                                       }).Average()
+                                   select new Results
                                    {
                                        CountryId = country.countryId,
                                        CountryName = country.countryName,
-                                       AvgHappyScore = avgHappyScore, 
-                                       //AvgLifeSpan = GetAvgLifeSpanByCountryId(happyScore.countryId)
-
+                                       AvgHappyScore = avgHappyScore,
+                                       AvgLifeSpan = avgLifeSpan
                                    }).Take(10);
+            List<Results> lifeList = LifeCollection.ToList<Results>();
+            HappyLifeObjectResults res = new HappyLifeObjectResults(happyList, lifeList);
 
-            GetAvgLifeSpanByCountryId(41);
-
-
-            /*IEnumerable<Results> enumerable()
-            {
-                foreach (var item in LifeCollection)
-                {
-                    if (HappyCollection.)
-                    {
-
-                    }
-                }
-
-                return null
-            }
-
-*/
-            return Json(HappyCollection);
+            string sJSONResponse = JsonConvert.SerializeObject(res);
+            return Json(sJSONResponse);
+            
         }
 
-
-        public int GetAvgLifeSpanByCountryId(int countryId)
-        {
-            var LifeCollection = from lifeSpan in entities.LifeYears
-                                 where (lifeSpan.countryId == countryId)
-                                 let avgLifeSpan = (new[]
-                                   {
-                                      lifeSpan.yr2005,
-                                      lifeSpan.yr2006,
-                                      lifeSpan.yr2007,
-                                      lifeSpan.yr2008,
-                                      lifeSpan.yr2009,
-                                      lifeSpan.yr2010,
-                                      lifeSpan.yr2011,
-                                      lifeSpan.yr2012,
-                                      lifeSpan.yr2013,
-                                      lifeSpan.yr2014,
-                                      lifeSpan.yr2015,
-                                      lifeSpan.yr2016,
-                                      lifeSpan.yr2017,
-                                      lifeSpan.yr2018,
-                                      lifeSpan.yr2019,
-                                   }).Average()
-                                 select new
-                                 {
-                                     avgLifeSpan
-                                };
-
-            Console.WriteLine("Items in LifeCollection: ");
-            foreach(var item in LifeCollection)
-            {
-                Console.WriteLine(item);
-            }
-            //int[] array =  LifeCollection.ToArray<int>();
-
-            return 0;
-        }
-
-
-        //Helper to get avg life span 
-        [ActionName("avgLifeSpan")]
-        public IHttpActionResult GetAvgLifeSpan()
-        {
-            var LifeCollection = from country in entities.Countries
-                                 from lifeSpan in country.LifeYears
-                                 let avgLifeSpan = (new[]
-                                   {
-                                      lifeSpan.yr2005,
-                                      lifeSpan.yr2006,
-                                      lifeSpan.yr2007,
-                                      lifeSpan.yr2008,
-                                      lifeSpan.yr2009,
-                                      lifeSpan.yr2010,
-                                      lifeSpan.yr2011,
-                                      lifeSpan.yr2012,
-                                      lifeSpan.yr2013,
-                                      lifeSpan.yr2014,
-                                      lifeSpan.yr2015,
-                                      lifeSpan.yr2016,
-                                      lifeSpan.yr2017,
-                                      lifeSpan.yr2018,
-                                      lifeSpan.yr2019,
-                                   }).Average()
-                                 select new
-                                 {
-                                     AvgLifeSpan = avgLifeSpan
-                                 };
-            return Json(LifeCollection);
-        }
 
         // Query 3 - Show estimated income per person and life expectancy of up to next 10 years. 
         [ActionName("estdIncomeLife")]
@@ -164,16 +149,26 @@ namespace HealthyWealthyApp.Controllers
         }
     }
 
+    public class HappyLifeObjectResults
+    {
+        public HappyLifeObjectResults(List<Results> happyCollectionResults, List<Results> lifeCollectinResults)
+        {
+            this.happyCollectionResults = happyCollectionResults;
+            this.lifeCollectinResults = lifeCollectinResults;
+        }
+
+        public List<Results> happyCollectionResults;
+        public List<Results> lifeCollectinResults;
+    }
 
     public class Results
     {
-        public string CountryName { get; set; }
-
         public int CountryId { get; set; }
+        public string CountryName { get; set; }
 
         public double AvgHappyScore { get; set; }
 
-        public int AvgLifeSpan { get; set; }
+        public double AvgLifeSpan { get; set; }
     }
 
 }
