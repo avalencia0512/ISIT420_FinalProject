@@ -136,16 +136,113 @@ namespace HealthyWealthyApp.Controllers
 
 
         // Query 3 - Show estimated income per person and life expectancy of up to next 10 years. 
+        //http://localhost:1289/api/values/estdIncomeLife
         [ActionName("estdIncomeLife")]
         public IHttpActionResult GetEstdIncomeLife()
         {
-            List<Results> counts = new List<Results>();
-            counts.Add(new Results() { CountryName = "Seattle", CountryId = 69 });
-            counts.Add(new Results() { CountryName = "Houston", CountryId = 78 });
-            counts.Add(new Results() { CountryName = "Orlando", CountryId = 85 });
-            counts.Add(new Results() { CountryName = "New Jersey", CountryId = 59 });
+            var WealthCollection = (from country in entities.Countries
+                                   from wealth in country.IncomePPs
+                                   from lifeSpan in country.LifeYears
+                                   where (lifeSpan.countryId == wealth.countryId)
+                                   let avgWealth = (new[]
+                                   {
+                                             wealth.yr2005,
+                                             wealth.yr2006,
+                                             wealth.yr2007,
+                                             wealth.yr2008,
+                                             wealth.yr2009,
+                                             wealth.yr2010,
+                                             wealth.yr2011,
+                                             wealth.yr2012,
+                                             wealth.yr2013,
+                                             wealth.yr2014,
+                                             wealth.yr2015,
+                                             wealth.yr2016,
+                                             wealth.yr2017,
+                                             wealth.yr2018,
+                                             wealth.yr2019
+                                       }).Average()
+                                   orderby avgWealth descending
+                                   let avgLifeSpan = (new[]
+                                   {
+                                              lifeSpan.yr2005,
+                                              lifeSpan.yr2006,
+                                              lifeSpan.yr2007,
+                                              lifeSpan.yr2008,
+                                              lifeSpan.yr2009,
+                                              lifeSpan.yr2010,
+                                              lifeSpan.yr2011,
+                                              lifeSpan.yr2012,
+                                              lifeSpan.yr2013,
+                                              lifeSpan.yr2014,
+                                              lifeSpan.yr2015,
+                                              lifeSpan.yr2016,
+                                              lifeSpan.yr2017,
+                                              lifeSpan.yr2018,
+                                              lifeSpan.yr2019,
+                                       }).Average()
+                                   select new Results
+                                   {
+                                       CountryId = country.countryId,
+                                       CountryName = country.countryName,
+                                       AvgWealthPP = avgWealth,
+                                       AvgLifeSpan = avgLifeSpan
+                                   }).Take(10);
+            List<Results> wealthList = WealthCollection.ToList<Results>();
 
-            return Json(counts);
+            var WLifeCollection = (from country in entities.Countries
+                                  from wealth in country.IncomePPs
+                                  from lifeSpan in country.LifeYears
+                                  where (lifeSpan.countryId == wealth.countryId)
+                                  let avgLifeSpan = (new[]
+                                  {
+                                              lifeSpan.yr2005,
+                                              lifeSpan.yr2006,
+                                              lifeSpan.yr2007,
+                                              lifeSpan.yr2008,
+                                              lifeSpan.yr2009,
+                                              lifeSpan.yr2010,
+                                              lifeSpan.yr2011,
+                                              lifeSpan.yr2012,
+                                              lifeSpan.yr2013,
+                                              lifeSpan.yr2014,
+                                              lifeSpan.yr2015,
+                                              lifeSpan.yr2016,
+                                              lifeSpan.yr2017,
+                                              lifeSpan.yr2018,
+                                              lifeSpan.yr2019,
+                                       }).Average()
+                                  orderby avgLifeSpan descending
+                                  let avgWealth = (new[]
+                                   {
+                                             wealth.yr2005,
+                                             wealth.yr2006,
+                                             wealth.yr2007,
+                                             wealth.yr2008,
+                                             wealth.yr2009,
+                                             wealth.yr2010,
+                                             wealth.yr2011,
+                                             wealth.yr2012,
+                                             wealth.yr2013,
+                                             wealth.yr2014,
+                                             wealth.yr2015,
+                                             wealth.yr2016,
+                                             wealth.yr2017,
+                                             wealth.yr2018,
+                                             wealth.yr2019
+                                       }).Average()
+                                  select new Results
+                                  {
+                                      CountryId = country.countryId,
+                                      CountryName = country.countryName,
+                                      AvgWealthPP = avgWealth,
+                                      AvgLifeSpan = avgLifeSpan
+                                  }).Take(10);
+            List<Results> lifeList = WLifeCollection.ToList<Results>();
+            WealthyLifeObjectResults res = new WealthyLifeObjectResults(wealthList, lifeList);
+
+            string sJSONResponse = JsonConvert.SerializeObject(res);
+            return Json(sJSONResponse);
         }
     }
 
@@ -161,6 +258,17 @@ namespace HealthyWealthyApp.Controllers
         public List<Results> lifeCollectinResults;
     }
 
+    public class WealthyLifeObjectResults
+    {
+        public WealthyLifeObjectResults(List<Results> wealthyCollectionResults, List<Results> lifeCollectinResults)
+        {
+            this.wealthyCollectionResults = wealthyCollectionResults;
+            this.lifeCollectinResults = lifeCollectinResults;
+        }
+
+        public List<Results> wealthyCollectionResults;
+        public List<Results> lifeCollectinResults;
+    }
     public class Results
     {
         public int CountryId { get; set; }
@@ -169,6 +277,8 @@ namespace HealthyWealthyApp.Controllers
         public double AvgHappyScore { get; set; }
 
         public double AvgLifeSpan { get; set; }
+
+        public double AvgWealthPP { get; set; }
     }
 
 }
