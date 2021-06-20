@@ -17,7 +17,7 @@ function getWealthyHealthy(topCountryCount) {
             $("#q1RichHappyTableBody").children().remove();
             $("#q1happyTableBody").children().remove();
 
-            var wealthColRes = data.wealthyCollectionResults;
+            var wealthColRes = data.low5IncomeCollectionResults;
             $.each(wealthColRes, function (index, val) {
                 tr = $('<tr/>');
                 tr.append("<td>" + val.CountryName + "</td>");
@@ -26,7 +26,7 @@ function getWealthyHealthy(topCountryCount) {
                 wealthHappyTable.append(tr);
             });
 
-            var happyColRes = data.happyCollectionResults;
+            var happyColRes = data.top5IncomeCollectionResults; 
             $.each(happyColRes, function (index, val) {
                 tr = $('<tr/>');
                 tr.append("<td>" + val.CountryName + "</td>");
@@ -99,7 +99,7 @@ function getEstdIncomeLife(nextYears, estdIncomeAmt) {
         $("#q3incomeLifeTableBody").children().remove();
         $("#q3longLifeTableBody").children().remove();
 
-        var wealthColRes = data.wealthyCollectionResults;
+        var wealthColRes = data.incomeCollectionResults;
         $.each(wealthColRes, function (index, val) {
             tr = $('<tr/>');
             tr.append("<td>" + val.CountryName + "</td>");

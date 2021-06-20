@@ -11,31 +11,117 @@ namespace HealthyWealthyApp.Controllers
         //Creates an instance of the object context
         HappyWealthyLifeDbEntities entities = new HappyWealthyLifeDbEntities();
 
+        //Query #1: Does wealth equal happiness?  - Analyze happiness and income to show happiness of top 5 countries with highest and lowest incomes. 
+        //http://localhost:1289/api/values/wealthyIsHappy
         [ActionName("wealthyIsHappy")]
         public IHttpActionResult GetWealthyIsHappy(int id)  // topCountryCount
         {
-            List<Results> counts = new List<Results>();
-            counts.Add(new Results() { CountryName = "Bellevue", CountryId = 3 });
-            counts.Add(new Results() { CountryName = "Redmond", CountryId = 10 });
+            //Top5IncomePP returns the top 5 wealthiest countries (PP) and their happiness score 
+            var Top5IncomePP = (from incomePP in entities.IncomePPs
+                                from happyScore in entities.Happinesses
+                                where (incomePP.countryId == happyScore.countryId)
+                                let avgIncomePP = (new[]
+                                {
+                                              incomePP.yr2005,
+                                              incomePP.yr2006,
+                                              incomePP.yr2007,
+                                              incomePP.yr2008,
+                                              incomePP.yr2009,
+                                              incomePP.yr2010,
+                                              incomePP.yr2011,
+                                              incomePP.yr2012,
+                                              incomePP.yr2013,
+                                              incomePP.yr2014,
+                                              incomePP.yr2015,
+                                              incomePP.yr2016,
+                                              incomePP.yr2017,
+                                              incomePP.yr2018,
+                                              incomePP.yr2019,
+                                }).Average()
+                                orderby avgIncomePP descending
+                                let avgHappyScore = (new[]
+                                {
+                                             happyScore.yr2005,
+                                             happyScore.yr2006,
+                                             happyScore.yr2007,
+                                             happyScore.yr2008,
+                                             happyScore.yr2009,
+                                             happyScore.yr2010,
+                                             happyScore.yr2011,
+                                             happyScore.yr2012,
+                                             happyScore.yr2013,
+                                             happyScore.yr2014,
+                                             happyScore.yr2015,
+                                             happyScore.yr2016,
+                                             happyScore.yr2017,
+                                             happyScore.yr2018,
+                                             happyScore.yr2019
+                                       }).Average()
+                                select new HappyIncome
+                                {
+                                    CountryId = incomePP.countryId,
+                                    CountryName = incomePP.Country.countryName,
+                                    AvgWealthPP = avgIncomePP,
+                                    AvgHappyScore = avgHappyScore
 
-            List<Results> wealthList = new List<Results>()
-            {
-                new Results()  {  CountryId = 1,   CountryName = "Japan",
-                                       AvgWealthPP = 37020, AvgHappyScore = 0.541    },
-                new Results()  {  CountryId = 2,   CountryName = "Singapore",
-                                       AvgWealthPP = 2920, AvgHappyScore = 0.493    }
-            };
-            List<Results> happyList = new List<Results>()
-            {
-                new Results()  {  CountryId = 1,   CountryName = "Costa Rica",
-                                       AvgWealthPP = 520, AvgHappyScore = 0.718    },
-                new Results()  {  CountryId = 2,   CountryName = "Bulgaria",
-                                       AvgWealthPP = 2011, AvgHappyScore = 0.692    }
-            };
+                                }).Take(5);
+            List<HappyIncome> top5IncomeList = Top5IncomePP.ToList<HappyIncome>();
 
-            WealthyHappyObjectResults res = new WealthyHappyObjectResults(happyList, wealthList);
+
+            var Low5IncomePP = (from incomePP in entities.IncomePPs
+                                from happyScore in entities.Happinesses
+                                where (incomePP.countryId == happyScore.countryId)
+                                let avgIncomePP = (new[]
+                                {
+                                              incomePP.yr2005,
+                                              incomePP.yr2006,
+                                              incomePP.yr2007,
+                                              incomePP.yr2008,
+                                              incomePP.yr2009,
+                                              incomePP.yr2010,
+                                              incomePP.yr2011,
+                                              incomePP.yr2012,
+                                              incomePP.yr2013,
+                                              incomePP.yr2014,
+                                              incomePP.yr2015,
+                                              incomePP.yr2016,
+                                              incomePP.yr2017,
+                                              incomePP.yr2018,
+                                              incomePP.yr2019,
+                                }).Average()
+                                orderby avgIncomePP ascending
+                                let avgHappyScore = (new[]
+                                {
+                                             happyScore.yr2005,
+                                             happyScore.yr2006,
+                                             happyScore.yr2007,
+                                             happyScore.yr2008,
+                                             happyScore.yr2009,
+                                             happyScore.yr2010,
+                                             happyScore.yr2011,
+                                             happyScore.yr2012,
+                                             happyScore.yr2013,
+                                             happyScore.yr2014,
+                                             happyScore.yr2015,
+                                             happyScore.yr2016,
+                                             happyScore.yr2017,
+                                             happyScore.yr2018,
+                                             happyScore.yr2019
+                                }).Average()
+                                select new HappyIncome
+                                {
+                                    CountryId = incomePP.countryId,
+                                    CountryName = incomePP.Country.countryName,
+                                    AvgWealthPP = avgIncomePP,
+                                    AvgHappyScore = avgHappyScore
+
+                                }).Take(5);
+            List<HappyIncome> low5IncomeList = Low5IncomePP.ToList<HappyIncome>();
+
+            HappyIncomeObjectResults res = new HappyIncomeObjectResults(top5IncomeList, low5IncomeList);
 
             return Ok(res);
+
         }
 
         //Query #2 - Do happy people live longer? - Relate happiness with life expectancy. Analyze if more happy people live longer. 
@@ -43,9 +129,7 @@ namespace HealthyWealthyApp.Controllers
         [ActionName("happyLongLife")]
         public IHttpActionResult GetHappyLongerLife(string happinessScore, string countryId)
         {
-            System.Data.Entity.DbSet<Country> countries = entities.Countries;
-            List<Country> countryList = countries.ToList();
-
+            //Happy collection returns the top 10 happiest countries and displays the avg life span per country.
             var HappyCollection =  (from country in entities.Countries
                                        from happyScore in country.Happinesses
                                        from lifeSpan in country.LifeYears
@@ -87,15 +171,16 @@ namespace HealthyWealthyApp.Controllers
                                               lifeSpan.yr2018,
                                               lifeSpan.yr2019,
                                        }).Average()
-                                       select new Results
+                                       select new HappyLife
                                        {
-                                           CountryId = country.countryId,
-                                           CountryName = country.countryName,
+                                           CountryId = happyScore.countryId,
+                                           CountryName = happyScore.Country.countryName,
                                            AvgHappyScore = avgHappyScore,
                                            AvgLifeSpan = avgLifeSpan
                                        }).Take(10);
-           List<Results> happyList =  HappyCollection.ToList<Results>();
+           List<HappyLife> happyList =  HappyCollection.ToList<HappyLife>();
 
+            //Life collection takes the top 10 countries with the highest avg life spans and shows their happiness score
             var LifeCollection = (from country in entities.Countries
                                    from happyScore in country.Happinesses
                                    from lifeSpan in country.LifeYears
@@ -137,14 +222,15 @@ namespace HealthyWealthyApp.Controllers
                                              happyScore.yr2018,
                                              happyScore.yr2019
                                        }).Average()
-                                   select new Results
+                                   select new HappyLife
                                    {
-                                       CountryId = country.countryId,
-                                       CountryName = country.countryName,
+                                       CountryId = happyScore.countryId,
+                                       CountryName = happyScore.Country.countryName,
                                        AvgHappyScore = avgHappyScore,
                                        AvgLifeSpan = avgLifeSpan
                                    }).Take(10);
-            List<Results> lifeList = LifeCollection.ToList<Results>();
+
+            List<HappyLife> lifeList = LifeCollection.ToList<HappyLife>();
             HappyLifeObjectResults res = new HappyLifeObjectResults(happyList, lifeList);
 
             string sJSONResponse = JsonConvert.SerializeObject(res);
@@ -199,14 +285,14 @@ namespace HealthyWealthyApp.Controllers
                                               lifeSpan.yr2018,
                                               lifeSpan.yr2019,
                                        }).Average()
-                                   select new Results
+                                   select new LifeIncome
                                    {
                                        CountryId = country.countryId,
                                        CountryName = country.countryName,
                                        AvgWealthPP = avgWealth,
                                        AvgLifeSpan = avgLifeSpan
                                    }).Take(10);
-            List<Results> wealthList = WealthCollection.ToList<Results>();
+            List<LifeIncome> wealthList = WealthCollection.ToList<LifeIncome>();
 
             var WLifeCollection = (from country in entities.Countries
                                   from wealth in country.IncomePPs
@@ -249,15 +335,16 @@ namespace HealthyWealthyApp.Controllers
                                              wealth.yr2018,
                                              wealth.yr2019
                                        }).Average()
-                                  select new Results
+                                  select new LifeIncome
                                   {
                                       CountryId = country.countryId,
                                       CountryName = country.countryName,
                                       AvgWealthPP = avgWealth,
                                       AvgLifeSpan = avgLifeSpan
                                   }).Take(10);
-            List<Results> lifeList = WLifeCollection.ToList<Results>();
-            WealthyLifeObjectResults res = new WealthyLifeObjectResults(wealthList, lifeList);
+            List<LifeIncome> lifeList = WLifeCollection.ToList<LifeIncome>();
+
+            LifeIncomeObjectResults res = new LifeIncomeObjectResults(wealthList, lifeList);
 
             //string sJSONResponse = JsonConvert.SerializeObject(res);
             return Ok(res);
@@ -276,49 +363,70 @@ namespace HealthyWealthyApp.Controllers
         }
     }
 
-    
-
-    public class WealthyHappyObjectResults
+    public class HappyIncomeObjectResults
     {
-        public WealthyHappyObjectResults(List<Results> happyCollectionResults, List<Results> wealthyCollectionResults)
+        public HappyIncomeObjectResults(List<HappyIncome> incomeCollectionResults, List<HappyIncome> happyCollectionResults)
         {
-            this.happyCollectionResults = happyCollectionResults;
-            this.wealthyCollectionResults = wealthyCollectionResults;
+            this.top5IncomeCollectionResults = happyCollectionResults;
+            this.low5IncomeCollectionResults = incomeCollectionResults;
         }
 
-        public List<Results> happyCollectionResults;
-        public List<Results> wealthyCollectionResults;
+        public List<HappyIncome> top5IncomeCollectionResults;
+        public List<HappyIncome> low5IncomeCollectionResults;
     }
 
     public class HappyLifeObjectResults
     {
-        public HappyLifeObjectResults(List<Results> happyCollectionResults, List<Results> lifeCollectinResults)
+        public HappyLifeObjectResults(List<HappyLife> happyCollectionResults, List<HappyLife> lifeCollectinResults)
         {
             this.happyCollectionResults = happyCollectionResults;
             this.lifeCollectinResults = lifeCollectinResults;
         }
 
-        public List<Results> happyCollectionResults;
-        public List<Results> lifeCollectinResults;
+        public List<HappyLife> happyCollectionResults;
+        public List<HappyLife> lifeCollectinResults;
     }
 
-    public class WealthyLifeObjectResults
+    public class LifeIncomeObjectResults
     {
-        public WealthyLifeObjectResults(List<Results> wealthyCollectionResults, List<Results> lifeCollectinResults)
+        public LifeIncomeObjectResults(List<LifeIncome> incomeCollectionResults, List<LifeIncome> lifeCollectinResults)
         {
-            this.wealthyCollectionResults = wealthyCollectionResults;
+            this.incomeCollectionResults = incomeCollectionResults;
             this.lifeCollectinResults = lifeCollectinResults;
         }
 
-        public List<Results> wealthyCollectionResults;
-        public List<Results> lifeCollectinResults;
+        public List<LifeIncome> incomeCollectionResults;
+        public List<LifeIncome> lifeCollectinResults;
     }
-    public class Results
+
+    public class HappyIncome
     {
         public int CountryId { get; set; }
         public string CountryName { get; set; }
 
         public double AvgHappyScore { get; set; }
+
+        public double AvgWealthPP { get; set; }
+
+    }
+
+
+    public class HappyLife
+    {
+        public int CountryId { get; set; }
+        public string CountryName { get; set; }
+
+        public double AvgHappyScore { get; set; }
+
+        public double AvgLifeSpan { get; set; }
+
+    }
+
+
+    public class LifeIncome
+    {
+        public int CountryId { get; set; }
+        public string CountryName { get; set; }
 
         public double AvgLifeSpan { get; set; }
 
