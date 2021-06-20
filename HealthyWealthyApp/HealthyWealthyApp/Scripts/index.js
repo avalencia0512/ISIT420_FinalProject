@@ -1,92 +1,120 @@
-﻿/*
-function getMarkups() {
-    $.getJSON(apiUrl + "/topCDCounts")
-        .done(function (data) {
-            $.each(data, function (key, item) {
-                // Add a list item for the product.
-                $('<li>', { text: "City: " + item.CityName + ", Count: " + item.RowsCount })
-                    .appendTo($('#ans1'));
-            });
-        }).fail(function (err) {
-            $("#ans1Err").text("ERROR: Unexpected error occured.");
-        });
-}*/
+﻿
 
-function getWealthyHealthy() {
+function getWealthyHealthy(topCountryCount) {
+    console.log("JQ Country Count = ", topCountryCount);
+    
     $.ajax({
         type: 'GET',
-        url: 'api/Values/wealthyIsHappy',
+        url: 'api/Values/wealthyIsHappy/' + topCountryCount,
         dataTypes: 'json',
         success: function (data) {
-            var happyTable = $('#happyTable');
+            console.log("Wealthy Live Happy Results: ", data);
+
+            var wealthHappyTable = $('#q1RichHappyTable');
+            var happyTable = $('#q1happyTable');
             var tr;
             // Empty table
-            $("#happyTableBody").children().remove()
+            $("#q1RichHappyTableBody").children().remove();
+            $("#q1happyTableBody").children().remove();
 
-            $.each(data, function (index, val) {
+            var wealthColRes = data.low5IncomeCollectionResults;
+            $.each(wealthColRes, function (index, val) {
                 tr = $('<tr/>');
-                tr.append("<td>" + val.CityName + "</td>");
-                tr.append("<td>" + val.RowsCount + "</td>");
+                tr.append("<td>" + val.CountryName + "</td>");
+                tr.append("<td class=\"rightAlign\">" + val.AvgWealthPP.toFixed(2) + "</td>");
+                tr.append("<td class=\"rightAlign\">" + val.AvgHappyScore.toFixed(3) + "</td>");
+                wealthHappyTable.append(tr);
+            });
+
+            var happyColRes = data.top5IncomeCollectionResults; 
+            $.each(happyColRes, function (index, val) {
+                tr = $('<tr/>');
+                tr.append("<td>" + val.CountryName + "</td>");
+                tr.append("<td class=\"rightAlign\">" + val.AvgWealthPP.toFixed(2) + "</td>");
+                tr.append("<td class=\"rightAlign\">" + val.AvgHappyScore.toFixed(3) + "</td>");
                 happyTable.append(tr);
             });
         }
     }); // ajax
 }
 
-function getHappyLongerLife() {
+// Q2 - Happy Live Longer
+function getHappyLongerLife(happyScore) {
+    //var happyScore = $('#happyMoreThan').val();
+    var countryIdSelect = $("#selectCountry").val();
+    var selectedText = $("#selectCountry").find(':selected').text();    
+    console.log("JQ Hp Score: ", happyScore, " Selected Country = ", countryIdSelect, " Name: ", selectedText);
 
-    $.get("../api/values/happyLongLife", function (data, status) {
+    var dataToPass = { happinessScore: happyScore, countryId: countryIdSelect };
+    
+    $.get("../api/values/happyLongLife", dataToPass, function (data, status) {
         //console.log("Happy Longer Life: ", data);
+        console.log("Happy Live Longer Results: ", data);
 
-        var happyLifeTable = $('#happyLifeTable');
+        var happyLifeTable = $('#q2happyLifeTable');
+        var longLifeTable = $('#q2longLifeTable');
         var tr;
         // Empty table
-        $("#happyLifeTableBody").children().remove()
+        $("#q2happyLifeTableBody").children().remove();
+        $("#q2longLifeTableBody").children().remove();
 
-        $.each(data, function (index, val) {
+        var happyColRes = data.happyCollectionResults;
+        $.each(happyColRes, function (index, val) {
             tr = $('<tr/>');
-            tr.append("<td>" + val.CityName + "</td>");
-            tr.append("<td>" + val.RowsCount + "</td>");
+            tr.append("<td>" + val.CountryName + "</td>");
+            tr.append("<td class=\"rightAlign\">" + val.AvgHappyScore.toFixed(3) + "</td>");
+            tr.append("<td class=\"rightAlign\">" + val.AvgLifeSpan.toFixed(0) + "</td>");
             happyLifeTable.append(tr);
+        });
+
+        var lifeColRes = data.lifeCollectinResults;
+        $.each(lifeColRes, function (index, val) {
+            tr = $('<tr/>');
+            tr.append("<td>" + val.CountryName + "</td>");
+            tr.append("<td class=\"rightAlign\">" + val.AvgHappyScore.toFixed(3) + "</td>");
+            tr.append("<td class=\"rightAlign\">" + val.AvgLifeSpan.toFixed(0) + "</td>");
+            longLifeTable.append(tr);
         });
     });
 
-    /**
-    $.ajax({
-        type: 'GET',
-        url: '../api/values/happyLongLife', 
-        dataTypes: 'json',
-        success: function (data) {
-            var happyLifeTable = $('#happyLifeTable');
-            var tr;
-            // Empty table
-            $("#happyLifeTableBody").children().remove()
-
-            $.each(data, function (index, val) {
-                tr = $('<tr/>');
-                tr.append("<td>" + val.CityName + "</td>");
-                tr.append("<td>" + val.RowsCount + "</td>");
-                happyLifeTable.append(tr);
-            });
-        }
-    }); // ajax
-    */
 }
 
-function getEstdIncomeLife() {
-    $.get("../api/values/estdIncomeLife", function (data, status) {
-        //console.log("Happy Longer Life: ", data);
+// Q3 - Wealthy Live Longer
+function getEstdIncomeLife(nextYears, estdIncomeAmt) {
 
-        var incomeLifeTable = $('#incomeLifeTable');
+    if (!estdIncomeAmt) {
+        estdIncomeAmt = 0;
+    }
+    console.log("Next Yrs = ", nextYears, " incomeAmt = ", estdIncomeAmt);
+
+    var dataToPass = { nextYears: nextYears, estdIncome: estdIncomeAmt };
+    
+    $.get("../api/values/estdIncomeLife", dataToPass, function (data, status) {
+        console.log("Wealthy Longer Life: ", data);
+
+        var incomeLifeTable = $("#q3incomeLifeTable");
+        var longLifeTable = $('#q3longLifeTable');
         var tr;
-        // Empty table
-        $("#incomeLifeTableBody").children().remove()
+        // Empty tables
+        $("#q3incomeLifeTableBody").children().remove();
+        $("#q3longLifeTableBody").children().remove();
 
-        $.each(data, function (index, val) {
+        var wealthColRes = data.incomeCollectionResults;
+        $.each(wealthColRes, function (index, val) {
             tr = $('<tr/>');
-            tr.append("<td>" + val.CityName + "</td>");
-            tr.append("<td>" + val.RowsCount + "</td>");
+            tr.append("<td>" + val.CountryName + "</td>");
+            tr.append("<td class=\"rightAlign\">" + val.AvgWealthPP.toFixed(2) + "</td>");
+            tr.append("<td class=\"rightAlign\">" + val.AvgLifeSpan.toFixed(0) + "</td>");
             incomeLifeTable.append(tr);
+        });
+
+        var lifeColRes = data.lifeCollectinResults;
+        $.each(lifeColRes, function (index, val) {
+            tr = $('<tr/>');
+            tr.append("<td>" + val.CountryName + "</td>");
+            tr.append("<td class=\"rightAlign\">" + val.AvgWealthPP.toFixed(2) + "</td>");
+            tr.append("<td class=\"rightAlign\">" + val.AvgLifeSpan.toFixed(0) + "</td>");
+            longLifeTable.append(tr);
         });
     });
 
