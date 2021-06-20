@@ -39,50 +39,101 @@
 
         <h2>Wealthy equals Healthy</h2>
         <br />
-        <div data-role="navbar" data-theme="b">
+        <div id="nav_bar" data-role="navbar">
             <ul>
-                <li><a href="#query1">Wealthy equals Healthy</a></li>
+                <li><a href="#query1" class="ui-btn-active">Wealthy equals Healthy</a></li>
                 <li><a href="#query2">Happy Live Longer</a></li>
                 <li><a href="#query3">Wealthy Live Longer</a></li>
             </ul>
         </div>
 
         <div data-role="main" data-theme="a">
-            <h1>Wealthy equals Healthy Contents</h1>
+            <h1 class="row">Wealthy equals Healthy Contents</h1>
             <br />
 
+            <!-- Filter form -->
             <div class="form table-bordered">
                 <div class="form-body" enter-key="$ctrl.doSearch()">
                     <div class="row">
                         <div class="form-group col-md-4">
                             <label class="control-label">Country's Count</label>
-                            <input type="range" id="countryTopCount" name="countryTopCount"
+                            <input type="range" id="countryTopCount" name="countryTopCount" value="160"
                                    min="0" max="160" class="form-control input" placeholder="Country's Count" />
                         </div>
                         <div class="form-group col-md-2">
-                            <input type="submit" value="Load" onclick="getWealthyHealthy()" style="margin-top:35px;">
+                            <input type="submit" value="Load" onclick="getWealthyHealthy($('#countryTopCount').val())" style="margin-top:35px;">
                         </div>
                     </div>
 
                 </div>
             </div>
 
-            <input id="btnQuery1" type="button" value="Get Happy Score" />
-            <table id="happyTable" class="table table-bordered table-condensed table-hover table-striped">
-                <thead>
-                    <tr>
-                        <th>Country Name</th>
-                        <th>Count</th>
-                    </tr>
-                </thead>
-                <tbody id="happyTableBody">
-                    <tr>
-                        <td>CCC</td>
-                        <td>333</td>
-                    </tr>
-                </tbody>
-            </table>
+            <br />
+            <div class="row">
+                <div class="col-md-6 tableTitle">
+                    Happy Score of Richest Countries (income per person)
+                </div>
+                <div class="col-sm-1">Vs</div>
+                <div class="col-md-5 tableTitle">
+                    Countries with Top Happy Score
+                </div>
+            </div>
 
+            <div class="row">
+                <div class="col-md-6">
+                    <table id="q1RichHappyTable" class="table table-bordered table-condensed table-hover table-striped">
+                        <thead>
+                            <tr>
+                                <th>Country Name</th>
+                                <th>Avg Income</th>
+                                <th>Avg Happy Score</th>
+                            </tr>
+                        </thead>
+                        <tbody id="q1RichHappyTableBody">
+                            <tr>
+                                <td>CCC</td>
+                                <td>333</td>
+                                <td>23</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-6">
+                    <table id="q1happyTable" class="table table-bordered table-condensed table-hover table-striped">
+                        <thead>
+                            <tr>
+                                <th>Country Name</th>
+                                <th>Avg Income</th>
+                                <th>Avg Happy Score</th>
+                            </tr>
+                        </thead>
+                        <tbody id="q1happyTableBody">
+                            <tr>
+                                <td>CCC</td>
+                                <td>333</td>
+                                <td>34</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!--
+    <table id="happyTable" class="table table-bordered table-condensed table-hover table-striped">
+        <thead>
+            <tr>
+                <th>Country Name</th>
+                <th>Count</th>
+            </tr>
+        </thead>
+        <tbody id="happyTableBody">
+            <tr>
+                <td>CCC</td>
+                <td>333</td>
+            </tr>
+        </tbody>
+    </table>
+        -->
         </div>
 
         <br /><br /><br /><br />
@@ -93,11 +144,11 @@
         </div>
 
         <!--
-        <hr />
-        <footer>
-            <p style="margin-left:10px;">&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-        -->
+    <hr />
+    <footer>
+        <p style="margin-left:10px;">&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+    </footer>
+    -->
     </div>
 </div>
 
@@ -111,7 +162,7 @@ Filters on:
 I.	Happiness Score >= (0.1 – 1.0)
 II.	Country
 -->
-<div data-role="page" id="query2" class="container">
+<div data-role="page" id="query2" class="container-fluid">
     <div data-role="header" data-theme="c">
         <div class="jumbotron">
             <h1>Healthy Wealthy Analysis</h1>
@@ -121,66 +172,107 @@ II.	Country
 
         <h2>Happy Live Longer</h2>
         <br />
-        <!-- nav bar -->
-        <div data-role="navbar" data-theme="b">
-            <ul>
-                <li><a href="#query1">Wealthy equals Healthy</a></li>
-                <li><a href="#query2">Happy Live Longer</a></li>
-                <li><a href="#query3">Wealthy Live Longer</a></li>
-            </ul>
-        </div>
+    </div>
 
-        <div data-role="main" data-theme="a">
-            <h1>Happy Live Longer Contents</h1>
-            <br />
 
-            <div class="form table-bordered">
-                <div class="form-body">
-                    <div class="row">
-                        <div class="form-group col-md-4">
-                            <label class="control-label">Happiness Score Greater Than </label>
-                            <input type="range" id="countryTopCount" name="countryTopCount" value="0.7"
-                                   min="0.1" max="1.0" class="form-control input" placeholder="Country's Count" />
-                        </div>
-                        <div class="form-group col-md-4">
-                            <label class="control-label">Country</label>
-                            <select id="selectHappyLife" class="bs-select form-control" data-style="blue">
-                                <option>Afghanistan</option>
-                                <option>USA</option>
-                                <option>UAE</option>
-                                <option>Canada</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-md-2">
-                            <input type="submit" value="Submit" onclick="getHappyLongerLife()" style="margin-top:35px;">
-                        </div>
+    <!-- nav bar -->
+    <div id="nav_bar" data-role="navbar">
+        <ul>
+            <li><a href="#query1">Wealthy equals Healthy</a></li>
+            <li><a href="#query2" class="ui-btn-active">Happy Live Longer</a></li>
+            <li><a href="#query3">Wealthy Live Longer</a></li>
+        </ul>
+    </div>
+
+    <div data-role="main" data-theme="a">
+        <h1 class="row">Happy Live Longer Contents</h1>
+        <br />
+
+        <!-- Filter form -->
+        <div class="form table-bordered">
+            <div class="form-body">
+                <div class="row">
+                    <div class="form-group col-md-4">
+                        <label class="control-label">Happiness Score Greater Than </label>
+                        <input type="range" id="happyMoreThan" name="happyMoreThan" 
+                               min="0.1" max="1.0" step="0.1" value="0.7" class="form-control input" />
                     </div>
-
+                    <div class="form-group col-md-4">
+                        <label class="control-label">Country</label>
+                        <select id="selectCountry" class="bs-select">
+                            <option value="0"></option>
+                            <option value="1">USA</option>
+                            <option value="2">UAE</option>
+                            <option value="3">Canada</option>
+                            <option value="4">Afghanistan</option>
+                        </select>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <input type="submit" value="Submit" 
+                               onclick="getHappyLongerLife($('#happyMoreThan').val())" style="margin-top:35px;">
+                    </div>
                 </div>
+
             </div>
-
-            <table id="happyLifeTable" class="table table-bordered table-condensed table-hover table-striped">
-                <thead>
-                    <tr>
-                        <th>Country Name</th>
-                        <th>Count</th>
-                    </tr>
-                </thead>
-                <tbody id="happyLifeTableBody">
-                    <tr>
-                        <td>CCC</td>
-                        <td>333</td>
-                    </tr>
-                </tbody>
-            </table>
         </div>
 
-        <br /><br /><br /><br />
-
-        <hr />
-        <div data-role="footer" data-theme='c'>
-            <h4 id="footertext"><p>&copy; @DateTime.Now.Year For Entertainment Purpose Only</p></h4>
+        <br />
+        <div class="row">
+            <div class="col-md-6 tableTitle">
+                Countries with Top Happy Score
+            </div>
+            <div class="col-sm-1">Vs</div>
+            <div class="col-md-5 tableTitle">
+                Countries with Top Avg Life
+            </div>
         </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <table id="q2happyLifeTable" class="table table-bordered table-condensed table-hover table-striped">
+                    <thead>
+                        <tr>
+                            <th>Country Name</th>
+                            <th>Avg Happy Score</th>
+                            <th>Avg Life Span</th>
+                        </tr>
+                    </thead>
+                    <tbody id="q2happyLifeTableBody">
+                        <tr>
+                            <td>CCC</td>
+                            <td>333</td>
+                            <td>23</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-md-6">
+                <table id="q2longLifeTable" class="table table-bordered table-condensed table-hover table-striped">
+                    <thead>
+                        <tr>
+                            <th>Country Name</th>
+                            <th>Avg Happy Score</th>
+                            <th>Avg Life Span</th>
+                        </tr>
+                    </thead>
+                    <tbody id="q2longLifeTableBody">
+                        <tr>
+                            <td>CCC</td>
+                            <td>333</td>
+                            <td>34</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+    <br /><br /><br /><br />
+
+    <hr />
+    <div data-role="footer" data-theme='c'>
+        <h4 id="footertext"><p>&copy; @DateTime.Now.Year For Entertainment Purpose Only</p></h4>
     </div>
 </div>
 
@@ -201,18 +293,19 @@ II.	Income >= Y (user input)
 
         <h2>Wealthy Live Longer</h2>
         <br />
-        <div data-role="navbar" data-theme="b">
+        <div id="nav_bar" data-role="navbar">
             <ul>
                 <li><a href="#query1">Wealthy equals Healthy</a></li>
                 <li><a href="#query2">Happy Live Longer</a></li>
-                <li><a href="#query3">Wealthy Live Longer</a></li>
+                <li><a href="#query3" class="ui-btn-active">Wealthy Live Longer</a></li>
             </ul>
         </div>
 
         <div data-role="main" data-theme="a">
-            <h1>Wealthy Live Longer Contents</h1>
+            <h1 class="row">Wealthy Live Longer Contents</h1>
             <br />
 
+            <!-- Filter form -->
             <div class="form table-bordered">
                 <div class="form-body">
                     <div class="row">
@@ -223,29 +316,67 @@ II.	Income >= Y (user input)
                         </div>
                         <div class="form-group col-md-4">
                             <label class="control-label">Income Greater Than Equal To</label>
-                            <input class="form-control input" type="number" id="estIncomeInput" name="estIncomeInput" /> 
+                            <input class="form-control input" type="number" id="estIncomeInput" name="estIncomeInput" />
                         </div>
                         <div class="form-group col-md-2">
-                            <input type="submit" value="Submit" onclick="getEstdIncomeLife()" style="margin-top:35px;">
+                            <input type="submit" value="Submit" 
+                                   onclick="getEstdIncomeLife($('#nextYearsRange').val(), $('#estIncomeInput').val())" 
+                                   style="margin-top:35px;">
                         </div>
                     </div>
                 </div>
             </div>
 
-            <table id="incomeLifeTable" class="table table-bordered table-condensed table-hover table-striped">
-                <thead>
-                    <tr>
-                        <th>Country Name</th>
-                        <th>Row Count</th>
-                    </tr>
-                </thead>
-                <tbody id="incomeLifeTableBody">
-                    <tr>
-                        <td>CCC</td>
-                        <td>222</td>
-                    </tr>
-                </tbody>
-            </table>
+            <br />
+            <div class="row">
+                <div class="col-md-6 tableTitle">
+                    Countries with Top Avg Estd. Income Per Person ($)
+                </div>
+                <div class="col-sm-1">Vs</div>
+                <div class="col-md-5 tableTitle">
+                    Countries with Top Avg Estd. Life (years)
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <table id="q3incomeLifeTable" class="table table-bordered table-condensed table-hover table-striped">
+                        <thead>
+                            <tr>
+                                <th>Country Name</th>
+                                <th>Avg Income per person</th>
+                                <th>Avg Life Span</th>
+                            </tr>
+                        </thead>
+                        <tbody id="q3incomeLifeTableBody">
+                            <tr>
+                                <td>CCC</td>
+                                <td class="rightAlign">333</td>
+                                <td class="rightAlign">23</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-md-6">
+                    <table id="q3longLifeTable" class="table table-bordered table-condensed table-hover table-striped">
+                        <thead>
+                            <tr>
+                                <th>Country Name</th>
+                                <th>Avg Income per person</th>
+                                <th>Avg Life Span</th>
+                            </tr>
+                        </thead>
+                        <tbody id="q3longLifeTableBody">
+                            <tr>
+                                <td>CCC</td>
+                                <td>333</td>
+                                <td>34</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
         </div>
 
         <br /><br /><br /><br />
