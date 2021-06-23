@@ -16,14 +16,12 @@ namespace HealthyWealthyApp.Controllers
         [ActionName("wealthyIsHappy")]
         public IHttpActionResult GetWealthyIsHappy(int id)  // topCountryCount
         {
-            if (id == 0)
-            {
-                id = 5;
-            }
+            id = id == 0 ? 10 : id + id;
+
             //Top5IncomePP returns the top 5 wealthiest countries (PP) and their happiness score 
             var Top5IncomePP = (from country in entities.Countries
-                                from incomePP in entities.IncomePPs
-                                from happyScore in entities.Happinesses
+                                from incomePP in country.IncomePPs
+                                from happyScore in country.Happinesses
                                 where (incomePP.countryId == happyScore.countryId)
                                 let avgIncomePP = (new[]
                                 {
@@ -70,11 +68,13 @@ namespace HealthyWealthyApp.Controllers
                                     AvgHappyScore = avgHappyScore
 
                                 }).Take(id);
-            List<HappyIncome> top5IncomeList = Top5IncomePP.ToList<HappyIncome>();
+            List<HappyIncome> top5IncomeList = Top5IncomePP.GroupBy(c => new { c.CountryId, c.CountryName, c.AvgHappyScore, c.AvgWealthPP })
+                    .Select(c => c.FirstOrDefault()).ToList();
+            top5IncomeList = top5IncomeList.OrderByDescending(x => x.AvgWealthPP).ToList(); ;
 
             var Low5IncomePP = (from country in entities.Countries
-                                from incomePP in entities.IncomePPs
-                                from happyScore in entities.Happinesses
+                                from incomePP in country.IncomePPs
+                                from happyScore in country.Happinesses
                                 where (incomePP.countryId == happyScore.countryId)
                                 let avgIncomePP = (new[]
                                 {
@@ -121,7 +121,9 @@ namespace HealthyWealthyApp.Controllers
                                     AvgHappyScore = avgHappyScore
 
                                 }).Take(id);
-            List<HappyIncome> low5IncomeList = Low5IncomePP.ToList<HappyIncome>();
+            List<HappyIncome> low5IncomeList = Low5IncomePP.GroupBy(c => new { c.CountryId, c.CountryName, c.AvgHappyScore, c.AvgWealthPP })
+                    .Select(c => c.FirstOrDefault()).ToList();
+            low5IncomeList = low5IncomeList.OrderBy(x => x.AvgWealthPP).ToList(); ;
 
             HappyIncomeObjectResults res = new HappyIncomeObjectResults(top5IncomeList, low5IncomeList);
 
@@ -135,10 +137,9 @@ namespace HealthyWealthyApp.Controllers
         public IHttpActionResult GetHappyLongerLife(double happinessScore, double lifeSpanParam)
         {
 
-            //Happy collection returns the top 10 happiest countries and displays the avg life span per country.
             var HappyCollection = (from country in entities.Countries
-                                   from happyScore in entities.Happinesses
-                                   from lifeSpan in entities.LifeYears
+                                   from happyScore in country.Happinesses
+                                   from lifeSpan in country.LifeYears
                                    let avgHappyScore = (new[]
                                    {
                                              happyScore.yr2005,
@@ -158,7 +159,7 @@ namespace HealthyWealthyApp.Controllers
                                              happyScore.yr2019
                                        }).Average()
                                    let avgLifeSpan = (new[]
-                                   {
+                                    {
                                               lifeSpan.yr2005,
                                               lifeSpan.yr2006,
                                               lifeSpan.yr2007,
@@ -176,20 +177,21 @@ namespace HealthyWealthyApp.Controllers
                                               lifeSpan.yr2019,
                                        }).Average()
                                    where (lifeSpan.countryId == happyScore.countryId && avgHappyScore >= happinessScore)
-                                   orderby avgHappyScore ascending
                                    select new HappyLife
-                                   {
-                                       CountryId = country.countryId,
-                                       CountryName = country.countryName,
-                                       AvgHappyScore = avgHappyScore,
-                                       AvgLifeSpan = avgLifeSpan
-                                   });
-            List<HappyLife> happyList = HappyCollection.ToList<HappyLife>();
+                                    {
+                                        CountryId = country.countryId,
+                                        CountryName = country.countryName,
+                                        AvgHappyScore = avgHappyScore,
+                                        AvgLifeSpan = avgLifeSpan
+                                    });
+            List<HappyLife> happyList = HappyCollection.GroupBy(c => new { c.CountryId, c.CountryName, c.AvgHappyScore, c.AvgLifeSpan })
+                     .Select(c => c.FirstOrDefault()).ToList();
+            happyList = happyList.OrderBy(x => x.AvgHappyScore).ToList();
 
             //Life collection takes the top 10 countries with the highest avg life spans and shows their happiness score
             var LifeCollection = (from country in entities.Countries
-                                  from happyScore in entities.Happinesses
-                                  from lifeSpan in entities.LifeYears
+                                  from happyScore in country.Happinesses
+                                  from lifeSpan in country.LifeYears
                                   let avgLifeSpan = (new[]
                                   {
                                               lifeSpan.yr2005,
@@ -227,7 +229,6 @@ namespace HealthyWealthyApp.Controllers
                                              happyScore.yr2019
                                        }).Average()
                                   where (lifeSpan.countryId == happyScore.countryId && avgLifeSpan >= lifeSpanParam)
-                                  orderby avgLifeSpan ascending
                                   select new HappyLife
                                   {
                                       CountryId = country.countryId,
@@ -236,11 +237,13 @@ namespace HealthyWealthyApp.Controllers
                                       AvgLifeSpan = avgLifeSpan
                                   });
 
-            List<HappyLife> lifeList = LifeCollection.ToList<HappyLife>(); 
+            List<HappyLife> lifeList = LifeCollection.GroupBy(c => new { c.CountryId, c.CountryName, c.AvgHappyScore, c.AvgLifeSpan })
+                        .Select(c => c.FirstOrDefault()).ToList();
+            lifeList = lifeList.OrderBy(x => x.AvgLifeSpan).ToList();
+
             HappyLifeObjectResults res = new HappyLifeObjectResults(happyList, lifeList);
 
             return Ok(res);
-            
         }
 
 

@@ -30,10 +30,10 @@ contents {
     margin-right: 10px;
 }
 
-#nav_bar ul li a.ui-btn-active {
+/*#nav_bar ul li a.ui-btn-active {
     background-color: dodgerblue;
 }
-
+*/
 .row {
     margin-left: 5px;
     margin-right: 5px;
@@ -41,7 +41,7 @@ contents {
 
 .tableTitle {
     text-align: center;
-    color: blueviolet;
+    color: black;
     font-weight: bold;
     font-size: medium;
 }
