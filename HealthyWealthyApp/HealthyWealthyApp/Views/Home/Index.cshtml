@@ -1,44 +1,12 @@
 ﻿
 
-<!--
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET Web API is a framework that makes it easy to build HTTP services that reach
-            a broad range of clients, including browsers and mobile devices. ASP.NET Web API
-            is an ideal platform for building RESTful applications on the .NET Framework.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301870">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301871">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301872">Learn more &raquo;</a></p>
-    </div>
-    <button onclick="getMarkups()">Get Markups</button>
-</div>
-
-<div class="row">
-    <asp:GridView runat="server" id="dataGrid" />
-</div>
-    -->
-
-<div data-role="page" id="query1">
+<div data-role="page" id="query1" class="container-fluid">
     <div data-role="header" data-theme="c">
         <div class="jumbotron">
             <h1>Happiness, Income and Life Analysis</h1>
             <p class="lead">Analysis that shows the relation between wealth and happiness.</p>
-            <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
         </div>
-
-        <h2>Income & Happiness</h2>
-        <br />
+        
         <div id="nav_bar" data-role="navbar">
             <ul>
                 <li><a href="#query1" class="ui-btn-active">Income & Happiness</a></li>
@@ -48,7 +16,7 @@
         </div>
 
         <div data-role="main" data-theme="a">
-            <h1 class="row">Income & Happiness Contents</h1>
+            <h1 class="row" style="color:forestgreen">Are wealthy people happier?</h1>
             <br />
 
             <!-- Filter form -->
@@ -56,7 +24,7 @@
                 <div class="form-body" enter-key="$ctrl.doSearch()">
                     <div class="row">
                         <div class="form-group col-md-4">
-                            <label class="control-label">Country's Count</label>
+                            <label class="control-label">Select the number of Country's you want to display:</label>
                             <input type="range" id="countryTopCount" name="countryTopCount" value="160"
                                    min="0" max="160" class="form-control input" placeholder="Country's Count" />
                         </div>
@@ -70,11 +38,11 @@
 
             <br />
             <div class="row">
-                <div class="col-md-6 tableTitle">
+                <div class="col-md-6 tableTitle" style="color:black">
                     Happiness score for highest earning countries (income per person)
                 </div>
                 <div class="col-sm-1">Vs</div>
-                <div class="col-md-5 tableTitle">
+                <div class="col-md-5 tableTitle" style="color:black">
                     Happiness score for lowest earning countries (income per person)
                 </div>
             </div>
@@ -90,11 +58,6 @@
                             </tr>
                         </thead>
                         <tbody id="q1RichHappyTableBody">
-                            <tr>
-                                <td>CCC</td>
-                                <td>333</td>
-                                <td>23</td>
-                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -108,39 +71,17 @@
                             </tr>
                         </thead>
                         <tbody id="q1happyTableBody">
-                            <tr>
-                                <td>CCC</td>
-                                <td>333</td>
-                                <td>34</td>
-                            </tr>
                         </tbody>
                     </table>
                 </div>
             </div>
-
-            <!--
-    <table id="happyTable" class="table table-bordered table-condensed table-hover table-striped">
-        <thead>
-            <tr>
-                <th>Country Name</th>
-                <th>Count</th>
-            </tr>
-        </thead>
-        <tbody id="happyTableBody">
-            <tr>
-                <td>CCC</td>
-                <td>333</td>
-            </tr>
-        </tbody>
-    </table>
-        -->
         </div>
 
         <br /><br /><br /><br />
 
         <hr />
         <div data-role="footer" data-theme='c'>
-            <h4 id="footertext"><p>&copy; @DateTime.Now.Year For Entertainment Purpose Only</p></h4>
+            <h4 id="footertext"><p>&copy; @DateTime.Now.Year For ISIT 420 Final Project, Spring 2021</p></h4>
         </div>
 
         <!--
@@ -167,11 +108,8 @@ II.	Country
         <div class="jumbotron">
             <h1>Happiness, Income and Life Analysis</h1>
             <p class="lead">Analysis that shows the relation between wealth and happiness.</p>
-            <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+            @*<p><a href="https://github.com/avalencia0512/ISIT420_FinalProject/blob/main/HW6.docx" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>*@
         </div>
-
-        <h2>Happiness & LifeSpan</h2>
-        <br />
     </div>
 
     <!-- nav bar -->
@@ -184,7 +122,7 @@ II.	Country
     </div>
 
     <div data-role="main" data-theme="a">
-        <h1 class="row">Happiness & LifeSpan Contents</h1>
+        <h1 class="row" style="color:orange">Do happy people live longer?</h1>
         <br />
 
         <!-- Filter form -->
@@ -233,11 +171,6 @@ II.	Country
                         </tr>
                     </thead>
                     <tbody id="q2happyLifeTableBody">
-                        <tr>
-                            <td>CCC</td>
-                            <td>333</td>
-                            <td>23</td>
-                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -251,11 +184,6 @@ II.	Country
                         </tr>
                     </thead>
                     <tbody id="q2longLifeTableBody">
-                        <tr>
-                            <td>CCC</td>
-                            <td>34</td>
-                            <td>333</td>
-                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -267,7 +195,7 @@ II.	Country
 
     <hr />
     <div data-role="footer" data-theme='c'>
-        <h4 id="footertext"><p>&copy; @DateTime.Now.Year For Entertainment Purpose Only</p></h4>
+        <h4 id="footertext"><p>&copy; @DateTime.Now.Year For ISIT 420 Final Project, Spring 2021</p></h4>
     </div>
 </div>
 
@@ -278,16 +206,14 @@ Filters on:
 I.	Next X years (1-10)
 II.	Income >= Y (user input)
 -->
-<div data-role="page" id="query3">
+<div data-role="page" id="query3" class="container-fluid">
     <div data-role="header" data-theme="c">
         <div class="jumbotron">
             <h1>Happiness, Income and Life Analysis</h1>
             <p class="lead">Analysis that shows the relation between wealth and happiness.</p>
-            <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+            @*<p><a href="https://github.com/avalencia0512/ISIT420_FinalProject/blob/main/HW6.docx" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>*@
         </div>
 
-        <h2>Income & Life Expentancy</h2>
-        <br />
         <div id="nav_bar" data-role="navbar">
             <ul>
                 <li><a href="#query1">Income & Happiness</a></li>
@@ -297,7 +223,7 @@ II.	Income >= Y (user input)
         </div>
 
         <div data-role="main" data-theme="a">
-            <h1 class="row">Income & Life Expentancy Contents</h1>
+            <h1 class="row" style="color:blue">Are wealthier people expected to live longer?</h1>
             <br />
 
             <!-- Filter form -->
@@ -331,35 +257,20 @@ II.	Income >= Y (user input)
                             <tr>
                                 <th>Country Name</th>
                                 <th>Avg Income per person</th>
-                                <th>Life 2021</th>
-                                <th>Life 2022</th>
-                                <th>Life 2023</th>
-                                <th>Life 2024</th>
-                                <th>Life 2025</th>
-                                <th>Life 2026</th>
-                                <th>Life 2027</th>
-                                <th>Life 2028</th>
-                                <th>Life 2029</th>
-                                <th>Life 2030</th>
-                                <th>Life 2031</th>
+                                <th>2021</th>
+                                <th>2022</th>
+                                <th>2023</th>
+                                <th>2024</th>
+                                <th>2025</th>
+                                <th>2026</th>
+                                <th>2027</th>
+                                <th>2028</th>
+                                <th>2029</th>
+                                <th>2030</th>
+                                <th>2031</th>
                             </tr>
                         </thead>
                         <tbody id="q3incomeLifeTableBody">
-                            <tr>
-                                <td></td>
-                                <td class="rightAlign"></td>
-                                <td class="rightAlign"></td>
-                                <td class="rightAlign"></td>
-                                <td class="rightAlign"></td>
-                                <td class="rightAlign"></td>
-                                <td class="rightAlign"></td>
-                                <td class="rightAlign"></td>
-                                <td class="rightAlign"></td>
-                                <td class="rightAlign"></td>
-                                <td class="rightAlign"></td>
-                                <td class="rightAlign"></td>
-                                <td class="rightAlign"></td>
-                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -371,7 +282,7 @@ II.	Income >= Y (user input)
 
         <hr />
         <div data-role="footer" data-theme='c'>
-            <h4 id="footertext"><p>&copy; @DateTime.Now.Year For Entertainment Purpose Only</p></h4>
+            <h4 id="footertext"><p>&copy; @DateTime.Now.Year For ISIT 420 Final Project, Spring 2021</p></h4>
         </div>
     </div>
 </div>

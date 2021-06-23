@@ -36,11 +36,12 @@ C:\Users\aleja\source\repos\ISIT420_FinalProject\HealthyWealthyApp\HealthyWealth
 C:\Users\aleja\source\repos\ISIT420_FinalProject\HealthyWealthyApp\HealthyWealthyApp\obj\Debug\HealthyWealthyApp.csproj.CopyComplete
 C:\Users\aleja\source\repos\ISIT420_FinalProject\HealthyWealthyApp\HealthyWealthyApp\obj\Debug\HealthyWealthyApp.dll
 C:\Users\aleja\source\repos\ISIT420_FinalProject\HealthyWealthyApp\HealthyWealthyApp\obj\Debug\HealthyWealthyApp.pdb
+D:\Bachelors\BellevueCollege\2021\Spring-2021\ISIT420-AdvData\HWs\CourseProject\ISIT420_FinalProject\HealthyWealthyApp\HealthyWealthyApp\bin\EntityFramework.dll
+D:\Bachelors\BellevueCollege\2021\Spring-2021\ISIT420-AdvData\HWs\CourseProject\ISIT420_FinalProject\HealthyWealthyApp\HealthyWealthyApp\bin\EntityFramework.xml
 D:\Bachelors\BellevueCollege\2021\Spring-2021\ISIT420-AdvData\HWs\CourseProject\ISIT420_FinalProject\HealthyWealthyApp\HealthyWealthyApp\bin\HealthyWealthyApp.dll.config
 D:\Bachelors\BellevueCollege\2021\Spring-2021\ISIT420-AdvData\HWs\CourseProject\ISIT420_FinalProject\HealthyWealthyApp\HealthyWealthyApp\bin\HealthyWealthyApp.dll
 D:\Bachelors\BellevueCollege\2021\Spring-2021\ISIT420-AdvData\HWs\CourseProject\ISIT420_FinalProject\HealthyWealthyApp\HealthyWealthyApp\bin\HealthyWealthyApp.pdb
 D:\Bachelors\BellevueCollege\2021\Spring-2021\ISIT420-AdvData\HWs\CourseProject\ISIT420_FinalProject\HealthyWealthyApp\HealthyWealthyApp\bin\Antlr3.Runtime.dll
-D:\Bachelors\BellevueCollege\2021\Spring-2021\ISIT420-AdvData\HWs\CourseProject\ISIT420_FinalProject\HealthyWealthyApp\HealthyWealthyApp\bin\EntityFramework.dll
 D:\Bachelors\BellevueCollege\2021\Spring-2021\ISIT420-AdvData\HWs\CourseProject\ISIT420_FinalProject\HealthyWealthyApp\HealthyWealthyApp\bin\EntityFramework.SqlServer.dll
 D:\Bachelors\BellevueCollege\2021\Spring-2021\ISIT420-AdvData\HWs\CourseProject\ISIT420_FinalProject\HealthyWealthyApp\HealthyWealthyApp\bin\Microsoft.Web.Infrastructure.dll
 D:\Bachelors\BellevueCollege\2021\Spring-2021\ISIT420-AdvData\HWs\CourseProject\ISIT420_FinalProject\HealthyWealthyApp\HealthyWealthyApp\bin\Newtonsoft.Json.dll
@@ -55,7 +56,6 @@ D:\Bachelors\BellevueCollege\2021\Spring-2021\ISIT420-AdvData\HWs\CourseProject\
 D:\Bachelors\BellevueCollege\2021\Spring-2021\ISIT420-AdvData\HWs\CourseProject\ISIT420_FinalProject\HealthyWealthyApp\HealthyWealthyApp\bin\System.Web.WebPages.dll
 D:\Bachelors\BellevueCollege\2021\Spring-2021\ISIT420-AdvData\HWs\CourseProject\ISIT420_FinalProject\HealthyWealthyApp\HealthyWealthyApp\bin\System.Web.WebPages.Razor.dll
 D:\Bachelors\BellevueCollege\2021\Spring-2021\ISIT420-AdvData\HWs\CourseProject\ISIT420_FinalProject\HealthyWealthyApp\HealthyWealthyApp\bin\WebGrease.dll
-D:\Bachelors\BellevueCollege\2021\Spring-2021\ISIT420-AdvData\HWs\CourseProject\ISIT420_FinalProject\HealthyWealthyApp\HealthyWealthyApp\bin\EntityFramework.xml
 D:\Bachelors\BellevueCollege\2021\Spring-2021\ISIT420-AdvData\HWs\CourseProject\ISIT420_FinalProject\HealthyWealthyApp\HealthyWealthyApp\bin\EntityFramework.SqlServer.xml
 D:\Bachelors\BellevueCollege\2021\Spring-2021\ISIT420-AdvData\HWs\CourseProject\ISIT420_FinalProject\HealthyWealthyApp\HealthyWealthyApp\bin\Newtonsoft.Json.xml
 D:\Bachelors\BellevueCollege\2021\Spring-2021\ISIT420-AdvData\HWs\CourseProject\ISIT420_FinalProject\HealthyWealthyApp\HealthyWealthyApp\bin\System.Net.Http.Formatting.xml
@@ -73,3 +73,4 @@ D:\Bachelors\BellevueCollege\2021\Spring-2021\ISIT420-AdvData\HWs\CourseProject\
 D:\Bachelors\BellevueCollege\2021\Spring-2021\ISIT420-AdvData\HWs\CourseProject\ISIT420_FinalProject\HealthyWealthyApp\HealthyWealthyApp\obj\Debug\HealthyWealthyApp.csproj.CopyComplete
 D:\Bachelors\BellevueCollege\2021\Spring-2021\ISIT420-AdvData\HWs\CourseProject\ISIT420_FinalProject\HealthyWealthyApp\HealthyWealthyApp\obj\Debug\HealthyWealthyApp.dll
 D:\Bachelors\BellevueCollege\2021\Spring-2021\ISIT420-AdvData\HWs\CourseProject\ISIT420_FinalProject\HealthyWealthyApp\HealthyWealthyApp\obj\Debug\HealthyWealthyApp.pdb
+D:\Bachelors\BellevueCollege\2021\Spring-2021\ISIT420-AdvData\HWs\CourseProject\ISIT420_FinalProject\HealthyWealthyApp\HealthyWealthyApp\obj\Debug\HealthyWealthyApp.csprojAssemblyReference.cache
